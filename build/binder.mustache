@@ -1,0 +1,9 @@
+{{#models}}
+from {{moduleName}} import {{className}}
+{{/models}}
+
+def register(clayful):
+
+{{#models}}
+	setattr(clayful, '{{className}}', {{className}}.config(clayful))
+{{/models}}

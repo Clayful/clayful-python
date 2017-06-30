@@ -1,0 +1,44 @@
+class {{className}}:
+
+	Clayful = None
+	name = '{{className}}'
+
+	@staticmethod
+	def config(clayful):
+
+		{{className}}.Clayful = clayful
+
+		return {{className}}
+
+{{#methods}}
+	@staticmethod
+	def {{method}}(*args):
+
+		return {{className}}.Clayful.call_api({
+			'model_name':       {{className}}.name,
+			'method_name':      '{{method}}',
+			'http_method':      '{{httpMethod}}',
+			'path':             '{{{path}}}',
+			'params':           ({{#arguments}}'{{{.}}}', {{/arguments}}),
+			{{#usesFormData}}'uses_form_data':   True,
+			{{/usesFormData}}{{#withoutPayload}}'without_payload':  True,
+			{{/withoutPayload}}'args':             args
+		})
+
+{{#aliases}}
+	@staticmethod
+	def {{.}}(*args):
+
+		return {{className}}.Clayful.call_api({
+			'model_name':       {{className}}.name,
+			'method_name':      '{{.}}',
+			'http_method':      '{{httpMethod}}',
+			'path':             '{{{path}}}',
+			'params':           ({{#arguments}}'{{{.}}}', {{/arguments}}),
+			{{#usesFormData}}'uses_form_data':   True,
+			{{/usesFormData}}{{#withoutPayload}}'without_payload':  True,
+			{{/withoutPayload}}'args':             args
+		})
+
+{{/aliases}}
+{{/methods}}
