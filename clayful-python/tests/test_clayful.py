@@ -87,7 +87,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 						'args':        (
 							'pid', # param1
 							{      # queryHeaders
-								'query':    { 'raw': 'true' },
+								'query':    { 'raw': True, 'originalPrice>': 1000, 'type': 'custom' },
 								'language': 'en'
 							},
 						)
@@ -96,7 +96,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 						'http_method': method,
 						'request_url': '/v1/products/pid',
 						'payload':     None,
-						'query':       { 'raw': 'true' },
+						'query':       { 'raw': 'true', 'originalPrice>': '1000', 'type': 'custom' }, # stringified values
 						'headers':     { 'Accept-Language': 'en' },
 					}
 				},
@@ -134,7 +134,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 								'slug': 'new-slug'
 							},
 							{      # queryHeaders
-								'query':    { 'raw': 'true' },
+								'query':    { 'raw': True },
 								'language': 'en'
 							},
 						)
@@ -143,7 +143,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 						'http_method': method,
 						'request_url': '/v1/products/pid',
 						'payload':     { 'slug': 'new-slug' },
-						'query':       { 'raw': 'true' },
+						'query':       { 'raw': 'true' }, # stringified values
 						'headers':     { 'Accept-Language': 'en' },
 					}
 				},
@@ -156,7 +156,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 						'args':            (
 							'rid', # param1
 							{      # queryHeaders
-								'query':     { 'raw': 'true' },
+								'query':     { 'raw': True },
 								'language':  'en'
 							},
 						)
@@ -165,7 +165,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 						'http_method': method,
 						'request_url': '/v1/me/products/reviews/rid/flag',
 						'payload':     None,
-						'query':       { 'raw': 'true' },
+						'query':       { 'raw': 'true' }, # stringified values
 						'headers':     { 'Accept-Language': 'en' },
 					}
 				},
@@ -283,3 +283,216 @@ class ClayfulMainModuleTest(unittest.TestCase):
 		Clayful.install('request', req)
 
 		self.assertEqual(Clayful.plugins['request'], req)
+
+	def test_format_image_url(self):
+
+		url = 'http://clayful.io'
+
+		cases = [
+			{
+				'out':     url
+			},
+			{
+				'out':     url,
+				'options': {}
+			},
+			{
+				'out':     url + '?width=120',
+				'options': { 'width' : 120 }
+			},
+			{
+				'out':     url + '?width=120&height=120',
+				'options': { 'width' : 120, 'height' : 120 }
+			}
+		]
+
+		for c in cases:
+
+			options = c.get('options', None)
+
+			if options is None:
+
+				self.assertEqual(Clayful.format_image_url(url), c.get('out'))
+
+			else:
+				self.assertEqual(Clayful.format_image_url(url, options), c.get('out'))
+
+	def test_format_number(self):
+
+		cases = [
+			{
+				'in':  None,
+				'out': ''
+			},
+			{
+				'in':  0,
+				'out': '0'
+			},
+			{
+				'in':  10,
+				'out': '10'
+			},
+			{
+				'options': {},
+				'in':      10,
+				'out':     '10'
+			},
+			# precision tests
+			{
+				'in':  0.250,
+				'out': '0.25'
+			},
+			{
+				'options': { 'precision' : 0 },
+				'in':      0,
+				'out':     '0'
+			},
+			{
+				'options': { 'precision' : 0 },
+				'in':      1234567.25,
+				'out':     '1234567'
+			},
+			{
+				'options': { 'precision' : 1 },
+				'in':      1234567.24,
+				'out':     '1234567.2' # rounded
+			},
+			{
+				'options': { 'precision' : 1 },
+				'in':      1234567.25,
+				'out':     '1234567.3' # rounded
+			},
+			{
+				'options': { 'precision' : 2 },
+				'in':      1234567.25,
+				'out':     '1234567.25'
+			},
+			{
+				'options': { 'precision' : 3 },
+				'in':      1234567.25,
+				'out':     '1234567.250'
+			},
+			{
+				'options': { 'precision' : 0 },
+				'in':      1234567,
+				'out':     '1234567'
+			},
+			{
+				'options': { 'precision' : 3 },
+				'in':      1234567,
+				'out':     '1234567.000'
+			},
+			# delimiter tests
+			{
+				'options': {
+					'precision': 3
+				},
+				'in':  1234567.25,
+				'out': '1234567.250'
+			},
+			{
+				'options': {
+					'precision': 3,
+					'delimiter': {}
+				},
+				'in':  1234567.25,
+				'out': '1234567.250'
+			},
+			{
+				'options': {
+					'precision': 3,
+					'delimiter': {
+						'thousands': ','
+					}
+				},
+				'in':  1234567.25,
+				'out': '1,234,567.250'
+			},
+			{
+				'options': {
+					'precision': 3,
+					'delimiter': {
+						'thousands': ' ',
+						'decimal':   ','
+					}
+				},
+				'in':  1234567.25,
+				'out': '1 234 567,250'
+			},
+		]
+
+		for c in cases:
+
+			options = c.get('options', None)
+
+			if options is None:
+
+				self.assertEqual(Clayful.format_number(c.get('in')), c.get('out'))
+
+			else:
+				self.assertEqual(Clayful.format_number(c.get('in'), options), c.get('out'))
+
+
+	def test_format_price(self):
+
+		cases = [
+			{
+				'in':  None,
+				'out': ''
+			},
+			{
+				'in':  0,
+				'out': '0'
+			},
+			{
+				'options': {},
+				'in':      0,
+				'out':     '0'
+			},
+			{
+				'in':  1234567.25,
+				'out': '1234567.25'
+			},
+			{
+				'options': {},
+				'in':      1234567.25,
+				'out':     '1234567.25'
+			},
+			{
+				'options': {
+					'symbol':    '$',
+					'format':    '{symbol}{price}',
+					'precision': 2,
+					'delimiter': {
+						'thousands': ',',
+						'decimal':   '.'
+					}
+				},
+				'in':  1234567.25,
+				'out': '$1,234,567.25'
+			},
+			{
+				'options': {
+					'symbol':    'won',
+					'format':    '{price} {symbol}',
+					'precision': 0,
+					'delimiter': {
+						'thousands': ',',
+						'decimal':   '.'
+					}
+				},
+				'in':  1234567.25,
+				'out': '1,234,567 won'
+			}
+		]
+
+		for c in cases:
+
+			options = c.get('options', None)
+
+			if options is None:
+
+				self.assertEqual(Clayful.format_price(c.get('in')), c.get('out'))
+
+			else:
+				self.assertEqual(Clayful.format_price(c.get('in'), options), c.get('out'))

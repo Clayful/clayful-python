@@ -1,3 +1,5 @@
+import re
+from numbers import Number
 from . import models
 from . import requester
 
@@ -48,6 +50,23 @@ class Clayful:
 
 		return Clayful.base_url + path
 
+	@staticmethod
+	def normalize_query_values(query = {}):
+
+		copied = query.copy()
+
+		for key in copied:
+
+			if isinstance(copied[key], bool):
+
+				copied[key] = 'true' if copied[key] == True else 'false'
+
+			if isinstance(copied[key], Number):
+
+				copied[key] = str(copied[key])
+
+		return copied
+
 
 	@staticmethod
 	def extract_request_arguments(options):
@@ -79,7 +98,7 @@ class Clayful:
 		except IndexError:
 			query_headers = {}
 
-		result['query'] = query_headers.get('query', {})
+		result['query'] = Clayful.normalize_query_values(query_headers.get('query', {}))
 		result['headers'] = Clayful.options_to_headers(query_headers)
 
 		return result
@@ -119,6 +138,79 @@ class Clayful:
 		if scope in Clayful.plugins:
 
 			Clayful.plugins[scope] = plugin
+
+	@staticmethod
+	def format_image_url(base_url, options = {}):
+
+		query = []
+
+		normalized = Clayful.normalize_query_values(options)
+
+		for key in normalized:
+
+			query.append(key + '=' + normalized.get(key, ''))
+
+		query = '&'.join(query)
+
+		if bool(query):
+
+			query = '?' + query
+
+		return base_url + query
+
+
+	@staticmethod
+	def format_number(number, currency = {}):
+
+		if not isinstance(number, Number):
+
+			return ''
+
+		precision = currency.get('precision', None)
+		delimiter = currency.get('delimiter', {})
+		thousands = delimiter.get('thousands', '')
+		decimal = delimiter.get('decimal', '.')
+
+		if isinstance(precision, Number):
+
+			n = 10 ** precision
+			number = round(number * n) / n
+
+			# To deal with 0.0 case..
+			if precision == 0:
+				number = int(number)
+
+		parts = str(number).split('.')
+
+
+		a = thousands.join(re.findall('.{1,3}', parts[0][::-1]))[::-1]
+		b = parts[1] if len(parts) > 1 else ''
+
+		if isinstance(precision, Number):
+
+			diff = precision - len(b)
+			diff = 0 if diff < 0 else diff;
+
+			b += '0' * diff
+
+		decimal = decimal if bool(b) else ''
+
+		return decimal.join([a, b])
+
+
+	@staticmethod
+	def format_price(number, currency = {}):
+
+		formatted_number = Clayful.format_number(number, currency)
+
+		if not bool(formatted_number):
+
+			return ''
+
+		symbol = currency.get('symbol', '')
+		format = currency.get('format', '{price}')
+
+		return format.replace('{symbol}', symbol).replace('{price}', formatted_number)
 
 
 # Register models

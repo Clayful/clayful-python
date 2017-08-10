@@ -2,6 +2,7 @@ class {{className}}:
 
 	Clayful = None
 	name = '{{className}}'
+	path = '{{{pathName}}}'
 
 	@staticmethod
 	def config(clayful):
@@ -10,7 +11,7 @@ class {{className}}:
 
 		return {{className}}
 
-{{#methods}}
+{{#apis}}
 	@staticmethod
 	def {{method}}(*args):
 
@@ -25,20 +26,4 @@ class {{className}}:
 			{{/withoutPayload}}'args':             args
 		})
 
-{{#aliases}}
-	@staticmethod
-	def {{.}}(*args):
-
-		return {{className}}.Clayful.call_api({
-			'model_name':       {{className}}.name,
-			'method_name':      '{{.}}',
-			'http_method':      '{{httpMethod}}',
-			'path':             '{{{path}}}',
-			'params':           ({{#arguments}}'{{{.}}}', {{/arguments}}),
-			{{#usesFormData}}'uses_form_data':   True,
-			{{/usesFormData}}{{#withoutPayload}}'without_payload':  True,
-			{{/withoutPayload}}'args':             args
-		})
-
-{{/aliases}}
-{{/methods}}
+{{/apis}}
