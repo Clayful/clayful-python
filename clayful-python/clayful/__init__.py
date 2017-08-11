@@ -1,7 +1,8 @@
 import re
-from numbers import Number
+import numbers
 from . import models
 from . import requester
+from .exception import ClayfulException
 
 class Clayful:
 
@@ -14,6 +15,11 @@ class Clayful:
 
 	plugins = {
 		'request': requester.request
+	}
+
+	listeners = {
+		'request':  [],
+		'response': []
 	}
 
 	@staticmethod
@@ -61,7 +67,7 @@ class Clayful:
 
 				copied[key] = 'true' if copied[key] == True else 'false'
 
-			if isinstance(copied[key], Number):
+			if isinstance(copied[key], numbers.Number):
 
 				copied[key] = str(copied[key])
 
@@ -76,7 +82,8 @@ class Clayful:
 			'request_url': options['path'],
 			'payload':     None,
 			'query':       {},
-			'headers':     {}
+			'headers':     {},
+			'meta':        {}
 		}
 
 		rest = options['args'][len(options['params']):]
@@ -100,6 +107,7 @@ class Clayful:
 
 		result['query'] = Clayful.normalize_query_values(query_headers.get('query', {}))
 		result['headers'] = Clayful.options_to_headers(query_headers)
+		result['meta'] = query_headers.get('meta', {})
 
 		return result
 
@@ -112,16 +120,37 @@ class Clayful:
 			'request_url':    Clayful.get_endpoint(extracted['request_url']),
 			'model_name':     options['model_name'],
 			'method_name':    options['method_name'],
-			'uses_form_data': options.get('uses_form_data', False)
+			'uses_form_data': options.get('uses_form_data', False),
+			'error':          None,
+			'response':       None,
 		})
 
 		default_headers = Clayful.default_headers.copy()
 
+		# Extend default headers with header options
 		default_headers.update(extracted['headers'])
 
 		extracted['headers'] = default_headers
 
-		return Clayful.plugins['request'](extracted)
+		Clayful.trigger('request', extracted)
+
+		try:
+
+			response = Clayful.plugins['request'](extracted)
+
+			extracted['response'] = response
+
+			Clayful.trigger('response', extracted)
+
+			return response
+
+		except ClayfulException as e:
+
+			extracted['error'] = e
+
+			Clayful.trigger('response', extracted)
+
+			raise
 
 
 	@staticmethod
@@ -138,6 +167,41 @@ class Clayful:
 		if scope in Clayful.plugins:
 
 			Clayful.plugins[scope] = plugin
+
+
+	@staticmethod
+	def on(event_name, callback):
+
+		listeners = Clayful.listeners.get(event_name, None)
+
+		if listeners is None:
+			return
+
+		listeners.append(callback)
+
+
+	@staticmethod
+	def off(event_name, callback):
+
+		listeners = Clayful.listeners.get(event_name, None)
+
+		if (listeners is None) or (not callback in listeners):
+			return
+
+		listeners.remove(callback)
+
+
+	@staticmethod
+	def trigger(event_name, data):
+
+		listeners = Clayful.listeners.get(event_name, None)
+
+		if listeners is None:
+			return
+
+		for listener in listeners:
+			listener(data)
+
 
 	@staticmethod
 	def format_image_url(base_url, options = {}):
@@ -162,7 +226,7 @@ class Clayful:
 	@staticmethod
 	def format_number(number, currency = {}):
 
-		if not isinstance(number, Number):
+		if not isinstance(number, numbers.Number):
 
 			return ''
 
@@ -171,7 +235,7 @@ class Clayful:
 		thousands = delimiter.get('thousands', '')
 		decimal = delimiter.get('decimal', '.')
 
-		if isinstance(precision, Number):
+		if isinstance(precision, numbers.Number):
 
 			n = 10 ** precision
 			number = round(number * n) / n
@@ -186,7 +250,7 @@ class Clayful:
 		a = thousands.join(re.findall('.{1,3}', parts[0][::-1]))[::-1]
 		b = parts[1] if len(parts) > 1 else ''
 
-		if isinstance(precision, Number):
+		if isinstance(precision, numbers.Number):
 
 			diff = precision - len(b)
 			diff = 0 if diff < 0 else diff;

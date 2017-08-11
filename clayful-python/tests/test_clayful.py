@@ -1,19 +1,32 @@
 import unittest
 from clayful import Clayful
+from clayful.exception import ClayfulException
 
 # Define mock requester class for tests
 class MockRequester():
 
-	def __init__(self):
+	def __init__(self, return_value = None):
 
-		self.requests = []
+		self.return_value = return_value
 
 	def request(self, request_option):
 
-		self.requests = self.requests + [request_option]
+		if isinstance(self.return_value, Exception):
+
+			raise self.return_value
+
+		else:
+
+			return self.return_value
 
 
 class ClayfulMainModuleTest(unittest.TestCase):
+
+	def setUp(self):
+
+		Clayful.listeners['request'] = []
+		Clayful.listeners['response'] = []
+
 
 	def test__default_options_for_api_client(self):
 
@@ -77,6 +90,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 						'payload':     None,
 						'query':       {},
 						'headers':     {},
+						'meta':        {}, # default meta
 					}
 				},
 				{
@@ -98,6 +112,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 						'payload':     None,
 						'query':       { 'raw': 'true', 'originalPrice>': '1000', 'type': 'custom' }, # stringified values
 						'headers':     { 'Accept-Language': 'en' },
+						'meta':        {}, # default meta
 					}
 				},
 			]
@@ -121,6 +136,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 						'payload':     { 'slug': 'new-slug' },
 						'query':       {},
 						'headers':     {},
+						'meta':        {},
 					}
 				},
 				{
@@ -135,7 +151,8 @@ class ClayfulMainModuleTest(unittest.TestCase):
 							},
 							{      # queryHeaders
 								'query':    { 'raw': True },
-								'language': 'en'
+								'language': 'en',
+								'meta':     { 'data': 'data' }
 							},
 						)
 					},
@@ -145,6 +162,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 						'payload':     { 'slug': 'new-slug' },
 						'query':       { 'raw': 'true' }, # stringified values
 						'headers':     { 'Accept-Language': 'en' },
+						'meta':        { 'data': 'data' }
 					}
 				},
 				{
@@ -156,8 +174,9 @@ class ClayfulMainModuleTest(unittest.TestCase):
 						'args':            (
 							'rid', # param1
 							{      # queryHeaders
-								'query':     { 'raw': True },
-								'language':  'en'
+								'query':    { 'raw': True },
+								'language': 'en',
+								'meta':     { 'data': 'data' }
 							},
 						)
 					},
@@ -167,6 +186,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 						'payload':     None,
 						'query':       { 'raw': 'true' }, # stringified values
 						'headers':     { 'Accept-Language': 'en' },
+						'meta':        { 'data': 'data' }
 					}
 				},
 			]
@@ -179,13 +199,70 @@ class ClayfulMainModuleTest(unittest.TestCase):
 
 			self.assertEqual(extracted, c['result'])
 
-	def test_call_api(self):
+	def test_call_api_success(self):
 
-		mock_requester = MockRequester()
+		triggered = {
+			'request':  False,
+			'response': False,
+		}
+
+		# Will return { 'response': True } as mock response
+		mock_requester = MockRequester({ 'response': True })
 
 		Clayful.install('request', mock_requester.request)
 
-		Clayful.call_api({
+		def request_callback(detail):
+			self.assertEqual(detail, {
+				'model_name':     'Brand',
+				'method_name':    'query',
+				'http_method':    'GET',
+				'request_url':    Clayful.base_url + '/v1/brands',
+				'query':          {},
+				'headers':        {
+					'Accept-Encoding': 'gzip',
+					'Accept-Currency': 'KRW',
+					'X-Clayful-SDK':   'clayful-python'
+				},
+				'payload':        None,
+				'uses_form_data': False,
+				'meta':           {},
+				'error':          None,
+				'response':       None # not populated yet
+			})
+
+			# set a new data
+			detail['meta']['request_called'] = True
+			triggered['request'] = True
+
+		def response_callback(detail):
+			self.assertEqual(detail, {
+				'model_name':     'Brand',
+				'method_name':    'query',
+				'http_method':    'GET',
+				'request_url':    Clayful.base_url + '/v1/brands',
+				'query':          {},
+				'headers':        {
+					'Accept-Encoding': 'gzip',
+					'Accept-Currency': 'KRW',
+					'X-Clayful-SDK':   'clayful-python'
+				},
+				'payload':        None,
+				'uses_form_data': False,
+				'meta':           { 'request_called': True }, # check data
+				'error':          None,
+				'response':       { 'response': True } # populated
+			})
+			triggered['response'] = True
+
+		Clayful.on('request', request_callback)
+		Clayful.on('response', response_callback)
+
+		self.assertEqual(Clayful.default_headers, {
+			'Accept-Encoding': 'gzip',
+			'X-Clayful-SDK':   'clayful-python'
+		})
+
+		response = Clayful.call_api({
 			'model_name':     'Brand',
 			'method_name':    'query',
 			'http_method':    'GET',
@@ -194,58 +271,236 @@ class ClayfulMainModuleTest(unittest.TestCase):
 			'args':           ({ 'currency': 'KRW' }, )
 		})
 
-		Clayful.call_api({
+		self.assertEqual(response, { 'response': True })
+		self.assertEqual(triggered, {
+			'request':  True,
+			'response': True,
+		})
+
+		self.assertEqual(Clayful.default_headers, {
+			'Accept-Encoding': 'gzip',
+			'X-Clayful-SDK':   'clayful-python'
+		})
+
+
+	def test_call_api_with_form_data_success(self):
+
+		triggered = {
+			'request':  False,
+			'response': False,
+		}
+
+		# Will return { 'response': True } as mock response
+		mock_requester = MockRequester({ 'response': True })
+
+		Clayful.install('request', mock_requester.request)
+
+		def request_callback(detail):
+			self.assertEqual(detail, {
+				'model_name':     'Image',
+				'method_name':    'create',
+				'http_method':    'POST',
+				'request_url':    Clayful.base_url + '/v1/images',
+				'query':          {},
+				'headers':        {
+					'Accept-Encoding': 'gzip',
+					'Accept-Language': 'ko',
+					'X-Clayful-SDK':   'clayful-python'
+				},
+				'payload':        { 'file': 'file' },
+				'uses_form_data': True,
+				'meta':           {},
+				'error':          None,
+				'response':       None # not populated yet
+			})
+
+			# set a new data
+			detail['meta']['request_called'] = True
+			triggered['request'] = True
+
+
+		def response_callback(detail):
+			self.assertEqual(detail, {
+				'model_name':     'Image',
+				'method_name':    'create',
+				'http_method':    'POST',
+				'request_url':    Clayful.base_url + '/v1/images',
+				'query':          {},
+				'headers':        {
+					'Accept-Encoding': 'gzip',
+					'Accept-Language': 'ko',
+					'X-Clayful-SDK':   'clayful-python'
+				},
+				'payload':        { 'file': 'file' },
+				'uses_form_data': True,
+				'meta':           { 'request_called': True },
+				'error':          None,
+				'response':       { 'response': True }
+			})
+			triggered['response'] = True
+
+		Clayful.on('request', request_callback)
+		Clayful.on('response', response_callback)
+
+		self.assertEqual(Clayful.default_headers, {
+			'Accept-Encoding': 'gzip',
+			'X-Clayful-SDK':   'clayful-python'
+		})
+
+		response = Clayful.call_api({
 			'model_name':     'Image',
 			'method_name':    'create',
 			'http_method':    'POST',
 			'path':           '/v1/images',
 			'params':         (),
-			'uses_form_data': True,
+			'uses_form_data': True, # Test form data
 			'args':           (
 				{ 'file': 'file' },
 				{ 'language': 'ko' },
 			)
 		})
 
-		self.assertEqual(Clayful.default_headers, {
-			'Accept-Encoding': 'gzip',
-			'X-Clayful-SDK':   'clayful-python'
-		})
-
-		self.assertEqual(mock_requester.requests[0], {
-			'model_name':     'Brand',
-			'method_name':    'query',
-			'http_method':    'GET',
-			'request_url':    Clayful.base_url + '/v1/brands',
-			'query':          {},
-			'headers':        {
-				'Accept-Encoding': 'gzip',
-				'Accept-Currency': 'KRW',
-				'X-Clayful-SDK':   'clayful-python'
-			},
-			'payload':        None,
-			'uses_form_data': False
-		})
-
-		self.assertEqual(mock_requester.requests[1], {
-			'model_name':     'Image',
-			'method_name':    'create',
-			'http_method':    'POST',
-			'request_url':    Clayful.base_url + '/v1/images',
-			'query':          {},
-			'headers':        {
-				'Accept-Encoding': 'gzip',
-				'Accept-Language': 'ko',
-				'X-Clayful-SDK':   'clayful-python'
-			},
-			'payload':        { 'file': 'file' },
-			'uses_form_data': True
+		self.assertEqual(response, { 'response': True })
+		self.assertEqual(triggered, {
+			'request':  True,
+			'response': True,
 		})
 
 		self.assertEqual(Clayful.default_headers, {
 			'Accept-Encoding': 'gzip',
 			'X-Clayful-SDK':   'clayful-python'
 		})
+
+
+	def test_call_api_fail_with_clayful_exception(self):
+
+		triggered = {
+			'request':  False,
+			'response': False,
+		}
+
+		error = ClayfulException()
+
+		# Will throw ClayfulException
+		mock_requester = MockRequester(error)
+
+		Clayful.install('request', mock_requester.request)
+
+		def request_callback(detail):
+			self.assertEqual(detail, {
+				'model_name':     'Brand',
+				'method_name':    'query',
+				'http_method':    'GET',
+				'request_url':    Clayful.base_url + '/v1/brands',
+				'query':          {},
+				'headers':        {
+					'Accept-Encoding': 'gzip',
+					'Accept-Currency': 'KRW',
+					'X-Clayful-SDK':   'clayful-python'
+				},
+				'payload':        None,
+				'uses_form_data': False,
+				'meta':           {},
+				'error':          None, # not populated yet
+				'response':       None
+			})
+
+			# set a new data
+			detail['meta']['request_called'] = True
+			triggered['request'] = True
+
+
+		def response_callback(detail):
+			self.assertEqual(detail, {
+				'model_name':     'Brand',
+				'method_name':    'query',
+				'http_method':    'GET',
+				'request_url':    Clayful.base_url + '/v1/brands',
+				'query':          {},
+				'headers':        {
+					'Accept-Encoding': 'gzip',
+					'Accept-Currency': 'KRW',
+					'X-Clayful-SDK':   'clayful-python'
+				},
+				'payload':        None,
+				'uses_form_data': False,
+				'meta':           { 'request_called': True }, # check data
+				'error':          error, # populated
+				'response':       None
+			})
+			triggered['response'] = True
+
+		Clayful.on('request', request_callback)
+		Clayful.on('response', response_callback)
+
+		try:
+
+			response = Clayful.call_api({
+				'model_name':     'Brand',
+				'method_name':    'query',
+				'http_method':    'GET',
+				'path':           '/v1/brands',
+				'params':         (),
+				'args':           ({ 'currency': 'KRW' }, )
+			})
+
+			# Just to check ClayfulException raise
+			self.assertEqual(1, 2)
+
+		except ClayfulException as e:
+
+			self.assertEqual(e, error)
+			self.assertEqual(triggered, {
+				'request':  True,
+				'response': True, # should've been triggered
+			})
+
+
+	def test_call_api_fail_with_other_exception(self):
+
+		triggered = {
+			'request':  False,
+			'response': False,
+		}
+
+		error = Exception()
+
+		# Will throw ClayfulException
+		mock_requester = MockRequester(error)
+
+		Clayful.install('request', mock_requester.request)
+
+		def request_callback(detail):
+			triggered['request'] = True
+
+
+		def response_callback(detail):
+			triggered['response'] = True
+
+		Clayful.on('request', request_callback)
+		Clayful.on('response', response_callback)
+
+		try:
+
+			response = Clayful.call_api({
+				'model_name':     'Brand',
+				'method_name':    'query',
+				'http_method':    'GET',
+				'path':           '/v1/brands',
+				'params':         (),
+				'args':           ({ 'currency': 'KRW' }, )
+			})
+
+			# Just to check Exception raise
+			self.assertEqual(1, 2)
+
+		except Exception as e:
+
+			self.assertEqual(e, error)
+			self.assertEqual(triggered, {
+				'request':  True,
+				'response': False, # shouldn't have been triggered
+			})
 
 
 	def test_config_api_client(self):
@@ -283,6 +538,46 @@ class ClayfulMainModuleTest(unittest.TestCase):
 		Clayful.install('request', req)
 
 		self.assertEqual(Clayful.plugins['request'], req)
+
+
+	def test_event_listeners(self):
+
+		triggered = {
+			'request':  None,
+			'response': None
+		}
+
+		self.assertEqual(len(Clayful.listeners['request']), 0)
+		self.assertEqual(len(Clayful.listeners['response']), 0)
+
+		def request_callback(data):
+			triggered['request'] = data
+
+		def response_callback(data):
+			triggered['response'] = data
+
+		Clayful.on('request', request_callback)
+		Clayful.on('response', response_callback)
+
+		self.assertEqual(len(Clayful.listeners['request']), 1)
+		self.assertEqual(len(Clayful.listeners['response']), 1)
+		self.assertEqual(Clayful.listeners['request'][0], request_callback)
+		self.assertEqual(Clayful.listeners['response'][0], response_callback)
+
+		Clayful.trigger('request', 1)
+		Clayful.trigger('response', 2)
+
+		self.assertEqual(triggered, {
+			'request':  1,
+			'response': 2
+		})
+
+		Clayful.off('request', request_callback)
+		Clayful.off('response', response_callback)
+
+		self.assertEqual(len(Clayful.listeners['request']), 0)
+		self.assertEqual(len(Clayful.listeners['response']), 0)
+
 
 	def test_format_image_url(self):
 

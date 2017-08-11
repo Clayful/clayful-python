@@ -2,9 +2,9 @@ class ClayfulException(Exception):
 
 	def __init__(
 		self,
-		model,
-		method,
-		status,
+		model = None,
+		method = None,
+		status = None,
 		headers = None,
 		code = None,
 		message = '',
