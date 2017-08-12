@@ -25,25 +25,25 @@ class Clayful:
 	@staticmethod
 	def options_to_headers(o = {}):
 
-		headers = {};
+		headers = {}
 
 		if 'language' in o:
-			headers['Accept-Language'] = o['language'];
+			headers['Accept-Language'] = o['language']
 
 		if 'currency' in o:
-			headers['Accept-Currency'] = o['currency'];
+			headers['Accept-Currency'] = o['currency']
 
 		if 'time_zone' in o:
-			headers['Accept-Time-Zone'] = o['time_zone'];
+			headers['Accept-Time-Zone'] = o['time_zone']
 
 		if 'client' in o:
-			headers['Authorization'] = 'Bearer ' + o['client'];
+			headers['Authorization'] = 'Bearer ' + o['client']
 
 		if 'customer' in o:
-			headers['X-Clayful-Customer-Authorization'] = 'Bearer ' + o['customer'];
+			headers['X-Clayful-Customer-Authorization'] = 'Bearer ' + o['customer']
 
 		if 'error_language' in o:
-			headers['X-Clayful-Error-Language'] = o['error_language'];
+			headers['X-Clayful-Error-Language'] = o['error_language']
 
 		if 'headers' in o:
 			headers.update(o['headers'])
@@ -253,7 +253,7 @@ class Clayful:
 		if isinstance(precision, numbers.Number):
 
 			diff = precision - len(b)
-			diff = 0 if diff < 0 else diff;
+			diff = 0 if diff < 0 else diff
 
 			b += '0' * diff
 
