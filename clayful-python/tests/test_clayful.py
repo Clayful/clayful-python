@@ -72,6 +72,23 @@ class ClayfulMainModuleTest(unittest.TestCase):
 		self.assertEqual(Clayful.get_endpoint('/v1/products'), Clayful.base_url + '/v1/products')
 
 
+	def test_normalize_query_values(self):
+
+		result = Clayful.normalize_query_values({
+			'string':  'string',
+			'number':  100,
+			'boolean': True,
+			'special': ' +&',
+		})
+
+		self.assertEqual(result, {
+			'string':  'string',
+			'number':  '100',
+			'boolean': 'true',
+			'special': '%20%2B%26',
+		})
+
+
 	def test_extract_api_request_arguments(self):
 
 		def build_get_delete_test_cases(method):
