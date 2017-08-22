@@ -57,13 +57,13 @@ class ClayfulMainModuleTest(unittest.TestCase):
 
 		self.assertEqual(result1, {})
 		self.assertEqual(result2, {
-			'Accept-Language':                  'ko',
-			'Accept-Currency':                  'KRW',
-			'Accept-Time-Zone':                 'Asia/Seoul',
-			'Authorization':                    'Bearer client_token',
-			'X-Clayful-Customer-Authorization': 'Bearer customer_token',
-			'X-Clayful-Error-Language':         'ko',
-			'X-Extra':                          'Extra'
+			'Accept-Language':          'ko',
+			'Accept-Currency':          'KRW',
+			'Accept-Time-Zone':         'Asia/Seoul',
+			'Authorization':            'Bearer client_token',
+			'X-Clayful-Customer':       'customer_token',
+			'X-Clayful-Error-Language': 'ko',
+			'X-Extra':                  'Extra'
 		})
 
 
@@ -518,15 +518,15 @@ class ClayfulMainModuleTest(unittest.TestCase):
 		})
 
 		self.assertEqual(Clayful.default_headers, {
-			'Accept-Encoding':                  'gzip',
-			'Accept-Language':                  'ko',
-			'Accept-Currency':                  'KRW',
-			'Accept-Time-Zone':                 'Asia/Seoul',
-			'Authorization':                    'Bearer client_token',
-			'X-Clayful-Customer-Authorization': 'Bearer customer_token',
-			'X-Clayful-Error-Language':         'ko',
-			'X-Clayful-SDK':                    'clayful-python',
-			'X-Extra':                          'Extra'
+			'Accept-Encoding':          'gzip',
+			'Accept-Language':          'ko',
+			'Accept-Currency':          'KRW',
+			'Accept-Time-Zone':         'Asia/Seoul',
+			'Authorization':            'Bearer client_token',
+			'X-Clayful-Customer':       'customer_token',
+			'X-Clayful-Error-Language': 'ko',
+			'X-Clayful-SDK':            'clayful-python',
+			'X-Extra':                  'Extra'
 		})
 
 

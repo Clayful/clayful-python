@@ -1,4 +1,5 @@
 import re
+import urllib
 import numbers
 from . import models
 from . import requester
@@ -40,7 +41,7 @@ class Clayful:
 			headers['Authorization'] = 'Bearer ' + o['client']
 
 		if 'customer' in o:
-			headers['X-Clayful-Customer-Authorization'] = 'Bearer ' + o['customer']
+			headers['X-Clayful-Customer'] = o['customer']
 
 		if 'error_language' in o:
 			headers['X-Clayful-Error-Language'] = o['error_language']
@@ -70,6 +71,8 @@ class Clayful:
 			if isinstance(copied[key], numbers.Number):
 
 				copied[key] = str(copied[key])
+
+			copied[key] = urllib.quote(copied[key])
 
 		return copied
 
