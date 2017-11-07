@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-	name             = 'clayful',
+	name             = 'clayful-python',
 	version          = '0.0.0',
 	description      = 'Python SDK for Clayful API',
 	long_description = open('README.md').read(),
