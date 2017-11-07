@@ -44,13 +44,13 @@ class ClayfulMainModuleTest(unittest.TestCase):
 
 		result1 = Clayful.options_to_headers({})
 		result2 = Clayful.options_to_headers({
-			'language':       'ko',
-			'currency':       'KRW',
-			'time_zone':      'Asia/Seoul',
-			'client':         'client_token',
-			'customer':       'customer_token',
-			'error_language': 'ko',
-			'headers':        {
+			'language':      'ko',
+			'currency':      'KRW',
+			'timeZone':      'Asia/Seoul',
+			'client':        'client_token',
+			'customer':      'customer_token',
+			'errorLanguage': 'ko',
+			'headers':       {
 				'X-Extra': 'Extra'
 			}
 		})
@@ -523,13 +523,13 @@ class ClayfulMainModuleTest(unittest.TestCase):
 	def test_config_api_client(self):
 
 		Clayful.config({
-			'language':       'ko',
-			'currency':       'KRW',
-			'time_zone':      'Asia/Seoul',
-			'client':         'client_token',
-			'customer':       'customer_token',
-			'error_language': 'ko',
-			'headers':        {
+			'language':      'ko',
+			'currency':      'KRW',
+			'timeZone':      'Asia/Seoul',
+			'client':        'client_token',
+			'customer':      'customer_token',
+			'errorLanguage': 'ko',
+			'headers':       {
 				'X-Extra': 'Extra'
 			}
 		})
