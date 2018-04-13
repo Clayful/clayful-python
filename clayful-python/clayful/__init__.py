@@ -11,7 +11,8 @@ class Clayful:
 
 	default_headers = {
 		'Accept-Encoding': 'gzip',
-		'X-Clayful-SDK':   'clayful-python'
+		'User-Agent':      'clayful-python',
+		'Clayful-SDK':     'clayful-python'
 	}
 
 	plugins = {
@@ -41,10 +42,10 @@ class Clayful:
 			headers['Authorization'] = 'Bearer ' + o['client']
 
 		if 'customer' in o:
-			headers['X-Clayful-Customer'] = o['customer']
+			headers['Authorization-Customer'] = o['customer']
 
-		if 'errorLanguage' in o:
-			headers['X-Clayful-Error-Language'] = o['errorLanguage']
+		if 'debugLanguage' in o:
+			headers['Accept-Debug-Language'] = o['debugLanguage']
 
 		if 'headers' in o:
 			headers.update(o['headers'])

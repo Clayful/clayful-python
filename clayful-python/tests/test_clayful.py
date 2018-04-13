@@ -33,7 +33,8 @@ class ClayfulMainModuleTest(unittest.TestCase):
 		self.assertEqual(Clayful.base_url, 'https://api.clayful.io')
 		self.assertEqual(Clayful.default_headers, {
 			'Accept-Encoding': 'gzip',
-			'X-Clayful-SDK':   'clayful-python'
+			'User-Agent':      'clayful-python',
+			'Clayful-SDK':     'clayful-python'
 		})
 		self.assertTrue(callable(Clayful.plugins['request']))
 		self.assertEqual(str(type(Clayful.Brand)), "<type 'classobj'>")
@@ -49,7 +50,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 			'timeZone':      'Asia/Seoul',
 			'client':        'client_token',
 			'customer':      'customer_token',
-			'errorLanguage': 'ko',
+			'debugLanguage': 'ko',
 			'headers':       {
 				'X-Extra': 'Extra'
 			}
@@ -61,8 +62,8 @@ class ClayfulMainModuleTest(unittest.TestCase):
 			'Accept-Currency':          'KRW',
 			'Accept-Time-Zone':         'Asia/Seoul',
 			'Authorization':            'Bearer client_token',
-			'X-Clayful-Customer':       'customer_token',
-			'X-Clayful-Error-Language': 'ko',
+			'Authorization-Customer':   'customer_token',
+			'Accept-Debug-Language':    'ko',
 			'X-Extra':                  'Extra'
 		})
 
@@ -237,8 +238,9 @@ class ClayfulMainModuleTest(unittest.TestCase):
 				'query':          {},
 				'headers':        {
 					'Accept-Encoding': 'gzip',
+					'User-Agent':      'clayful-python',
 					'Accept-Currency': 'KRW',
-					'X-Clayful-SDK':   'clayful-python'
+					'Clayful-SDK':     'clayful-python'
 				},
 				'payload':        None,
 				'uses_form_data': False,
@@ -260,8 +262,9 @@ class ClayfulMainModuleTest(unittest.TestCase):
 				'query':          {},
 				'headers':        {
 					'Accept-Encoding': 'gzip',
+					'User-Agent':      'clayful-python',
 					'Accept-Currency': 'KRW',
-					'X-Clayful-SDK':   'clayful-python'
+					'Clayful-SDK':     'clayful-python'
 				},
 				'payload':        None,
 				'uses_form_data': False,
@@ -276,7 +279,8 @@ class ClayfulMainModuleTest(unittest.TestCase):
 
 		self.assertEqual(Clayful.default_headers, {
 			'Accept-Encoding': 'gzip',
-			'X-Clayful-SDK':   'clayful-python'
+			'User-Agent':      'clayful-python',
+			'Clayful-SDK':     'clayful-python'
 		})
 
 		response = Clayful.call_api({
@@ -296,7 +300,8 @@ class ClayfulMainModuleTest(unittest.TestCase):
 
 		self.assertEqual(Clayful.default_headers, {
 			'Accept-Encoding': 'gzip',
-			'X-Clayful-SDK':   'clayful-python'
+			'User-Agent':      'clayful-python',
+			'Clayful-SDK':     'clayful-python'
 		})
 
 
@@ -321,8 +326,9 @@ class ClayfulMainModuleTest(unittest.TestCase):
 				'query':          {},
 				'headers':        {
 					'Accept-Encoding': 'gzip',
+					'User-Agent':      'clayful-python',
 					'Accept-Language': 'ko',
-					'X-Clayful-SDK':   'clayful-python'
+					'Clayful-SDK':     'clayful-python'
 				},
 				'payload':        { 'file': 'file' },
 				'uses_form_data': True,
@@ -345,8 +351,9 @@ class ClayfulMainModuleTest(unittest.TestCase):
 				'query':          {},
 				'headers':        {
 					'Accept-Encoding': 'gzip',
+					'User-Agent':      'clayful-python',
 					'Accept-Language': 'ko',
-					'X-Clayful-SDK':   'clayful-python'
+					'Clayful-SDK':     'clayful-python'
 				},
 				'payload':        { 'file': 'file' },
 				'uses_form_data': True,
@@ -361,7 +368,8 @@ class ClayfulMainModuleTest(unittest.TestCase):
 
 		self.assertEqual(Clayful.default_headers, {
 			'Accept-Encoding': 'gzip',
-			'X-Clayful-SDK':   'clayful-python'
+			'User-Agent':      'clayful-python',
+			'Clayful-SDK':     'clayful-python'
 		})
 
 		response = Clayful.call_api({
@@ -385,7 +393,8 @@ class ClayfulMainModuleTest(unittest.TestCase):
 
 		self.assertEqual(Clayful.default_headers, {
 			'Accept-Encoding': 'gzip',
-			'X-Clayful-SDK':   'clayful-python'
+			'User-Agent':      'clayful-python',
+			'Clayful-SDK':     'clayful-python'
 		})
 
 
@@ -412,8 +421,9 @@ class ClayfulMainModuleTest(unittest.TestCase):
 				'query':          {},
 				'headers':        {
 					'Accept-Encoding': 'gzip',
+					'User-Agent':      'clayful-python',
 					'Accept-Currency': 'KRW',
-					'X-Clayful-SDK':   'clayful-python'
+					'Clayful-SDK':     'clayful-python'
 				},
 				'payload':        None,
 				'uses_form_data': False,
@@ -436,8 +446,9 @@ class ClayfulMainModuleTest(unittest.TestCase):
 				'query':          {},
 				'headers':        {
 					'Accept-Encoding': 'gzip',
+					'User-Agent':      'clayful-python',
 					'Accept-Currency': 'KRW',
-					'X-Clayful-SDK':   'clayful-python'
+					'Clayful-SDK':     'clayful-python'
 				},
 				'payload':        None,
 				'uses_form_data': False,
@@ -528,7 +539,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 			'timeZone':      'Asia/Seoul',
 			'client':        'client_token',
 			'customer':      'customer_token',
-			'errorLanguage': 'ko',
+			'debugLanguage': 'ko',
 			'headers':       {
 				'X-Extra': 'Extra'
 			}
@@ -540,9 +551,10 @@ class ClayfulMainModuleTest(unittest.TestCase):
 			'Accept-Currency':          'KRW',
 			'Accept-Time-Zone':         'Asia/Seoul',
 			'Authorization':            'Bearer client_token',
-			'X-Clayful-Customer':       'customer_token',
-			'X-Clayful-Error-Language': 'ko',
-			'X-Clayful-SDK':            'clayful-python',
+			'Authorization-Customer':   'customer_token',
+			'Accept-Debug-Language':    'ko',
+			'User-Agent':               'clayful-python',
+			'Clayful-SDK':              'clayful-python',
 			'X-Extra':                  'Extra'
 		})
 
