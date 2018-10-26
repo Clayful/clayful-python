@@ -45,26 +45,28 @@ class ClayfulMainModuleTest(unittest.TestCase):
 
 		result1 = Clayful.options_to_headers({})
 		result2 = Clayful.options_to_headers({
-			'language':      'ko',
-			'currency':      'KRW',
-			'timeZone':      'Asia/Seoul',
-			'client':        'client_token',
-			'customer':      'customer_token',
-			'debugLanguage': 'ko',
-			'headers':       {
+			'language':       'ko',
+			'currency':       'KRW',
+			'time_zone':      'Asia/Seoul',
+			'client':         'client_token',
+			'customer':       'customer_token',
+			'reCAPTCHA':      'response',
+			'debug_language': 'ko',
+			'headers':        {
 				'X-Extra': 'Extra'
 			}
 		})
 
 		self.assertEqual(result1, {})
 		self.assertEqual(result2, {
-			'Accept-Language':          'ko',
-			'Accept-Currency':          'KRW',
-			'Accept-Time-Zone':         'Asia/Seoul',
-			'Authorization':            'Bearer client_token',
-			'Authorization-Customer':   'customer_token',
-			'Accept-Debug-Language':    'ko',
-			'X-Extra':                  'Extra'
+			'Accept-Language':        'ko',
+			'Accept-Currency':        'KRW',
+			'Accept-Time-Zone':       'Asia/Seoul',
+			'Authorization':          'Bearer client_token',
+			'Authorization-Customer': 'customer_token',
+			'reCAPTCHA-Response':     'response',
+			'Accept-Debug-Language':  'ko',
+			'X-Extra':                'Extra'
 		})
 
 
@@ -534,28 +536,30 @@ class ClayfulMainModuleTest(unittest.TestCase):
 	def test_config_api_client(self):
 
 		Clayful.config({
-			'language':      'ko',
-			'currency':      'KRW',
-			'timeZone':      'Asia/Seoul',
-			'client':        'client_token',
-			'customer':      'customer_token',
-			'debugLanguage': 'ko',
-			'headers':       {
+			'language':       'ko',
+			'currency':       'KRW',
+			'time_zone':      'Asia/Seoul',
+			'client':         'client_token',
+			'customer':       'customer_token',
+			'reCAPTCHA':      'response',
+			'debug_language': 'ko',
+			'headers':        {
 				'X-Extra': 'Extra'
 			}
 		})
 
 		self.assertEqual(Clayful.default_headers, {
-			'Accept-Encoding':          'gzip',
-			'Accept-Language':          'ko',
-			'Accept-Currency':          'KRW',
-			'Accept-Time-Zone':         'Asia/Seoul',
-			'Authorization':            'Bearer client_token',
-			'Authorization-Customer':   'customer_token',
-			'Accept-Debug-Language':    'ko',
-			'User-Agent':               'clayful-python',
-			'Clayful-SDK':              'clayful-python',
-			'X-Extra':                  'Extra'
+			'Accept-Encoding':        'gzip',
+			'Accept-Language':        'ko',
+			'Accept-Currency':        'KRW',
+			'Accept-Time-Zone':       'Asia/Seoul',
+			'Authorization':          'Bearer client_token',
+			'Authorization-Customer': 'customer_token',
+			'reCAPTCHA-Response':     'response',
+			'Accept-Debug-Language':  'ko',
+			'User-Agent':             'clayful-python',
+			'Clayful-SDK':            'clayful-python',
+			'X-Extra':                'Extra'
 		})
 
 

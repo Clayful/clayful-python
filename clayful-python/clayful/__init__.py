@@ -35,8 +35,8 @@ class Clayful:
 		if 'currency' in o:
 			headers['Accept-Currency'] = o['currency']
 
-		if 'timeZone' in o:
-			headers['Accept-Time-Zone'] = o['timeZone']
+		if 'time_zone' in o:
+			headers['Accept-Time-Zone'] = o['time_zone']
 
 		if 'client' in o:
 			headers['Authorization'] = 'Bearer ' + o['client']
@@ -44,8 +44,11 @@ class Clayful:
 		if 'customer' in o:
 			headers['Authorization-Customer'] = o['customer']
 
-		if 'debugLanguage' in o:
-			headers['Accept-Debug-Language'] = o['debugLanguage']
+		if 'reCAPTCHA' in o:
+			headers['reCAPTCHA-Response'] = o['reCAPTCHA'];
+
+		if 'debug_language' in o:
+			headers['Accept-Debug-Language'] = o['debug_language']
 
 		if 'headers' in o:
 			headers.update(o['headers'])
