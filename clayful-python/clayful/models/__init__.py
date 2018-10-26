@@ -1,31 +1,31 @@
-from brand import Brand
-from cart import Cart
-from catalog import Catalog
-from collection import Collection
-from country import Country
-from coupon import Coupon
-from currency import Currency
-from customer import Customer
-from discount import Discount
-from downloadable import Downloadable
-from group import Group
-from image import Image
-from impression import Impression
-from order import Order
-from order_tag import OrderTag
-from payment_method import PaymentMethod
-from product import Product
-from review import Review
-from review_comment import ReviewComment
-from shipping_method import ShippingMethod
-from store import Store
-from subscription import Subscription
-from subscription_plan import SubscriptionPlan
-from tax_category import TaxCategory
-from tracker import Tracker
-from wish_list import WishList
+from clayful.models.brand import Brand
+from clayful.models.cart import Cart
+from clayful.models.catalog import Catalog
+from clayful.models.collection import Collection
+from clayful.models.country import Country
+from clayful.models.coupon import Coupon
+from clayful.models.currency import Currency
+from clayful.models.customer import Customer
+from clayful.models.discount import Discount
+from clayful.models.downloadable import Downloadable
+from clayful.models.group import Group
+from clayful.models.image import Image
+from clayful.models.impression import Impression
+from clayful.models.order import Order
+from clayful.models.order_tag import OrderTag
+from clayful.models.payment_method import PaymentMethod
+from clayful.models.product import Product
+from clayful.models.review import Review
+from clayful.models.review_comment import ReviewComment
+from clayful.models.shipping_method import ShippingMethod
+from clayful.models.store import Store
+from clayful.models.subscription import Subscription
+from clayful.models.subscription_plan import SubscriptionPlan
+from clayful.models.tax_category import TaxCategory
+from clayful.models.tracker import Tracker
+from clayful.models.wish_list import WishList
 
-def register(clayful):
+def register_models(clayful):
 
 	setattr(clayful, 'Brand', Brand.config(clayful))
 	setattr(clayful, 'Cart', Cart.config(clayful))

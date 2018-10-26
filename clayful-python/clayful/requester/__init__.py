@@ -1,6 +1,6 @@
 import requests
-from ..response import ClayfulResponse
-from ..exception import ClayfulException
+from clayful.response import ClayfulResponse
+from clayful.exception import ClayfulException
 
 def request(request_options):
 

@@ -1,9 +1,9 @@
 import re
 import urllib
 import numbers
-from . import models
-from . import requester
-from .exception import ClayfulException
+from clayful.models import register_models
+from clayful.requester import request
+from clayful.exception import ClayfulException
 
 class Clayful:
 
@@ -16,7 +16,7 @@ class Clayful:
 	}
 
 	plugins = {
-		'request': requester.request
+		'request': request
 	}
 
 	listeners = {
@@ -285,4 +285,4 @@ class Clayful:
 
 
 # Register models
-models.register(Clayful)
+register_models(Clayful)
