@@ -12,18 +12,6 @@ class OrderTag:
 		return OrderTag
 
 	@staticmethod
-	def query(*args):
-
-		return OrderTag.Clayful.call_api({
-			'model_name':       OrderTag.name,
-			'method_name':      'query',
-			'http_method':      'GET',
-			'path':             '/v1/orders/tags',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def list(*args):
 
 		return OrderTag.Clayful.call_api({

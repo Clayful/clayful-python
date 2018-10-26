@@ -12,18 +12,6 @@ class Currency:
 		return Currency
 
 	@staticmethod
-	def query(*args):
-
-		return Currency.Clayful.call_api({
-			'model_name':       Currency.name,
-			'method_name':      'query',
-			'http_method':      'GET',
-			'path':             '/v1/currencies',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def list(*args):
 
 		return Currency.Clayful.call_api({

@@ -12,18 +12,6 @@ class PaymentMethod:
 		return PaymentMethod
 
 	@staticmethod
-	def query(*args):
-
-		return PaymentMethod.Clayful.call_api({
-			'model_name':       PaymentMethod.name,
-			'method_name':      'query',
-			'http_method':      'GET',
-			'path':             '/v1/payments/methods',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def list(*args):
 
 		return PaymentMethod.Clayful.call_api({

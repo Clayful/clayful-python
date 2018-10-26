@@ -12,18 +12,6 @@ class Downloadable:
 		return Downloadable
 
 	@staticmethod
-	def query(*args):
-
-		return Downloadable.Clayful.call_api({
-			'model_name':       Downloadable.name,
-			'method_name':      'query',
-			'http_method':      'GET',
-			'path':             '/v1/downloadables',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def list(*args):
 
 		return Downloadable.Clayful.call_api({

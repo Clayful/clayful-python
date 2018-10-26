@@ -12,11 +12,11 @@ class Cart:
 		return Cart
 
 	@staticmethod
-	def count_items_as_me(*args):
+	def count_items_for_me(*args):
 
 		return Cart.Clayful.call_api({
 			'model_name':       Cart.name,
-			'method_name':      'count_items_as_me',
+			'method_name':      'count_items_for_me',
 			'http_method':      'GET',
 			'path':             '/v1/me/cart/items/count',
 			'params':           (),
@@ -36,37 +36,25 @@ class Cart:
 		})
 
 	@staticmethod
+	def get_for_me(*args):
+
+		return Cart.Clayful.call_api({
+			'model_name':       Cart.name,
+			'method_name':      'get_for_me',
+			'http_method':      'POST',
+			'path':             '/v1/me/cart',
+			'params':           (),
+			'args':             args
+		})
+
+	@staticmethod
 	def get_as_non_registered(*args):
 
 		return Cart.Clayful.call_api({
 			'model_name':       Cart.name,
 			'method_name':      'get_as_non_registered',
 			'http_method':      'POST',
-			'path':             '/v1/cart',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
-	def checkout_as_non_registered(*args):
-
-		return Cart.Clayful.call_api({
-			'model_name':       Cart.name,
-			'method_name':      'checkout_as_non_registered',
-			'http_method':      'POST',
-			'path':             '/v1/cart/checkout',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
-	def get_as_me(*args):
-
-		return Cart.Clayful.call_api({
-			'model_name':       Cart.name,
-			'method_name':      'get_as_me',
-			'http_method':      'POST',
-			'path':             '/v1/me/cart',
+			'path':             '/v1/customers/non-registered/cart',
 			'params':           (),
 			'args':             args
 		})
@@ -84,25 +72,25 @@ class Cart:
 		})
 
 	@staticmethod
-	def checkout_as_me(*args):
+	def add_item_for_me(*args):
 
 		return Cart.Clayful.call_api({
 			'model_name':       Cart.name,
-			'method_name':      'checkout_as_me',
+			'method_name':      'add_item_for_me',
 			'http_method':      'POST',
-			'path':             '/v1/me/cart/checkout',
+			'path':             '/v1/me/cart/items',
 			'params':           (),
 			'args':             args
 		})
 
 	@staticmethod
-	def add_item_as_me(*args):
+	def get_as_non_registered_for_me(*args):
 
 		return Cart.Clayful.call_api({
 			'model_name':       Cart.name,
-			'method_name':      'add_item_as_me',
+			'method_name':      'get_as_non_registered_for_me',
 			'http_method':      'POST',
-			'path':             '/v1/me/cart/items',
+			'path':             '/v1/me/non-registered/cart',
 			'params':           (),
 			'args':             args
 		})
@@ -120,23 +108,59 @@ class Cart:
 		})
 
 	@staticmethod
+	def checkout_for_me(*args):
+
+		return Cart.Clayful.call_api({
+			'model_name':       Cart.name,
+			'method_name':      'checkout_for_me',
+			'http_method':      'POST',
+			'path':             '/v1/me/cart/checkout/{type}',
+			'params':           ('type', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def checkout_as_non_registered(*args):
+
+		return Cart.Clayful.call_api({
+			'model_name':       Cart.name,
+			'method_name':      'checkout_as_non_registered',
+			'http_method':      'POST',
+			'path':             '/v1/customers/non-registered/cart/checkout/{type}',
+			'params':           ('type', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def checkout(*args):
 
 		return Cart.Clayful.call_api({
 			'model_name':       Cart.name,
 			'method_name':      'checkout',
 			'http_method':      'POST',
-			'path':             '/v1/customers/{customerId}/cart/checkout',
-			'params':           ('customerId', ),
+			'path':             '/v1/customers/{customerId}/cart/checkout/{type}',
+			'params':           ('customerId', 'type', ),
 			'args':             args
 		})
 
 	@staticmethod
-	def update_item_as_me(*args):
+	def checkout_as_non_registered_for_me(*args):
 
 		return Cart.Clayful.call_api({
 			'model_name':       Cart.name,
-			'method_name':      'update_item_as_me',
+			'method_name':      'checkout_as_non_registered_for_me',
+			'http_method':      'POST',
+			'path':             '/v1/me/non-registered/cart/checkout/{type}',
+			'params':           ('type', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def update_item_for_me(*args):
+
+		return Cart.Clayful.call_api({
+			'model_name':       Cart.name,
+			'method_name':      'update_item_for_me',
 			'http_method':      'PUT',
 			'path':             '/v1/me/cart/items/{itemId}',
 			'params':           ('itemId', ),
@@ -156,11 +180,11 @@ class Cart:
 		})
 
 	@staticmethod
-	def empty_as_me(*args):
+	def empty_for_me(*args):
 
 		return Cart.Clayful.call_api({
 			'model_name':       Cart.name,
-			'method_name':      'empty_as_me',
+			'method_name':      'empty_for_me',
 			'http_method':      'DELETE',
 			'path':             '/v1/me/cart/items',
 			'params':           (),
@@ -180,11 +204,11 @@ class Cart:
 		})
 
 	@staticmethod
-	def delete_item_as_me(*args):
+	def delete_item_for_me(*args):
 
 		return Cart.Clayful.call_api({
 			'model_name':       Cart.name,
-			'method_name':      'delete_item_as_me',
+			'method_name':      'delete_item_for_me',
 			'http_method':      'DELETE',
 			'path':             '/v1/me/cart/items/{itemId}',
 			'params':           ('itemId', ),

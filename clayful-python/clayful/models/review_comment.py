@@ -12,18 +12,6 @@ class ReviewComment:
 		return ReviewComment
 
 	@staticmethod
-	def query(*args):
-
-		return ReviewComment.Clayful.call_api({
-			'model_name':       ReviewComment.name,
-			'method_name':      'query',
-			'http_method':      'GET',
-			'path':             '/v1/products/reviews/comments',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def list(*args):
 
 		return ReviewComment.Clayful.call_api({
@@ -60,54 +48,6 @@ class ReviewComment:
 		})
 
 	@staticmethod
-	def query_by_review(*args):
-
-		return ReviewComment.Clayful.call_api({
-			'model_name':       ReviewComment.name,
-			'method_name':      'query_by_review',
-			'http_method':      'GET',
-			'path':             '/v1/products/reviews/{reviewId}/comments',
-			'params':           ('reviewId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def list_by_review(*args):
-
-		return ReviewComment.Clayful.call_api({
-			'model_name':       ReviewComment.name,
-			'method_name':      'list_by_review',
-			'http_method':      'GET',
-			'path':             '/v1/products/reviews/{reviewId}/comments',
-			'params':           ('reviewId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def query_by_author(*args):
-
-		return ReviewComment.Clayful.call_api({
-			'model_name':       ReviewComment.name,
-			'method_name':      'query_by_author',
-			'http_method':      'GET',
-			'path':             '/v1/{authorModel}/{authorId}/products/reviews/comments',
-			'params':           ('authorModel', 'authorId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def list_by_author(*args):
-
-		return ReviewComment.Clayful.call_api({
-			'model_name':       ReviewComment.name,
-			'method_name':      'list_by_author',
-			'http_method':      'GET',
-			'path':             '/v1/{authorModel}/{authorId}/products/reviews/comments',
-			'params':           ('authorModel', 'authorId', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def create(*args):
 
 		return ReviewComment.Clayful.call_api({
@@ -120,11 +60,11 @@ class ReviewComment:
 		})
 
 	@staticmethod
-	def create_as_me(*args):
+	def create_for_me(*args):
 
 		return ReviewComment.Clayful.call_api({
 			'model_name':       ReviewComment.name,
-			'method_name':      'create_as_me',
+			'method_name':      'create_for_me',
 			'http_method':      'POST',
 			'path':             '/v1/me/products/reviews/comments',
 			'params':           (),
@@ -138,58 +78,21 @@ class ReviewComment:
 			'model_name':       ReviewComment.name,
 			'method_name':      'flag',
 			'http_method':      'POST',
-			'path':             '/v1/products/reviews/comments/{reviewCommentId}/flag',
+			'path':             '/v1/products/reviews/comments/{reviewCommentId}/flags',
 			'params':           ('reviewCommentId', ),
 			'args':             args
 		})
 
 	@staticmethod
-	def flag_as_me(*args):
+	def flag_for_me(*args):
 
 		return ReviewComment.Clayful.call_api({
 			'model_name':       ReviewComment.name,
-			'method_name':      'flag_as_me',
+			'method_name':      'flag_for_me',
 			'http_method':      'POST',
-			'path':             '/v1/me/products/reviews/comments/{reviewCommentId}/flag',
-			'params':           ('reviewCommentId', ),
-			'without_payload':  True,
-			'args':             args
-		})
-
-	@staticmethod
-	def cancel_flag(*args):
-
-		return ReviewComment.Clayful.call_api({
-			'model_name':       ReviewComment.name,
-			'method_name':      'cancel_flag',
-			'http_method':      'POST',
-			'path':             '/v1/products/reviews/comments/{reviewCommentId}/flag/cancel',
-			'params':           ('reviewCommentId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def cancel_flag_as_me(*args):
-
-		return ReviewComment.Clayful.call_api({
-			'model_name':       ReviewComment.name,
-			'method_name':      'cancel_flag_as_me',
-			'http_method':      'POST',
-			'path':             '/v1/me/products/reviews/comments/{reviewCommentId}/flag/cancel',
+			'path':             '/v1/me/products/reviews/comments/{reviewCommentId}/flags',
 			'params':           ('reviewCommentId', ),
 			'without_payload':  True,
-			'args':             args
-		})
-
-	@staticmethod
-	def increase_metafield(*args):
-
-		return ReviewComment.Clayful.call_api({
-			'model_name':       ReviewComment.name,
-			'method_name':      'increase_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/products/reviews/comments/{reviewCommentId}/meta/{field}/inc',
-			'params':           ('reviewCommentId', 'field', ),
 			'args':             args
 		})
 
@@ -218,6 +121,18 @@ class ReviewComment:
 		})
 
 	@staticmethod
+	def increase_metafield(*args):
+
+		return ReviewComment.Clayful.call_api({
+			'model_name':       ReviewComment.name,
+			'method_name':      'increase_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/products/reviews/comments/{reviewCommentId}/meta/{field}/inc',
+			'params':           ('reviewCommentId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def update(*args):
 
 		return ReviewComment.Clayful.call_api({
@@ -230,26 +145,14 @@ class ReviewComment:
 		})
 
 	@staticmethod
-	def update_as_me(*args):
+	def update_for_me(*args):
 
 		return ReviewComment.Clayful.call_api({
 			'model_name':       ReviewComment.name,
-			'method_name':      'update_as_me',
+			'method_name':      'update_for_me',
 			'http_method':      'PUT',
 			'path':             '/v1/me/products/reviews/comments/{reviewCommentId}',
 			'params':           ('reviewCommentId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def update_as_author(*args):
-
-		return ReviewComment.Clayful.call_api({
-			'model_name':       ReviewComment.name,
-			'method_name':      'update_as_author',
-			'http_method':      'PUT',
-			'path':             '/v1/{authorModel}/{authorId}/products/reviews/comments/{reviewCommentId}',
-			'params':           ('authorModel', 'authorId', 'reviewCommentId', ),
 			'args':             args
 		})
 
@@ -266,13 +169,25 @@ class ReviewComment:
 		})
 
 	@staticmethod
-	def delete_as_me(*args):
+	def delete_for_me(*args):
 
 		return ReviewComment.Clayful.call_api({
 			'model_name':       ReviewComment.name,
-			'method_name':      'delete_as_me',
+			'method_name':      'delete_for_me',
 			'http_method':      'DELETE',
 			'path':             '/v1/me/products/reviews/comments/{reviewCommentId}',
+			'params':           ('reviewCommentId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def cancel_flag_for_me(*args):
+
+		return ReviewComment.Clayful.call_api({
+			'model_name':       ReviewComment.name,
+			'method_name':      'cancel_flag_for_me',
+			'http_method':      'DELETE',
+			'path':             '/v1/me/products/reviews/comments/{reviewCommentId}/flags',
 			'params':           ('reviewCommentId', ),
 			'args':             args
 		})
@@ -286,6 +201,18 @@ class ReviewComment:
 			'http_method':      'DELETE',
 			'path':             '/v1/products/reviews/comments/{reviewCommentId}/meta/{field}',
 			'params':           ('reviewCommentId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def cancel_flag(*args):
+
+		return ReviewComment.Clayful.call_api({
+			'model_name':       ReviewComment.name,
+			'method_name':      'cancel_flag',
+			'http_method':      'DELETE',
+			'path':             '/v1/products/reviews/comments/{reviewCommentId}/flags/{customerId}',
+			'params':           ('reviewCommentId', 'customerId', ),
 			'args':             args
 		})
 

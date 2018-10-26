@@ -12,18 +12,6 @@ class Group:
 		return Group
 
 	@staticmethod
-	def query(*args):
-
-		return Group.Clayful.call_api({
-			'model_name':       Group.name,
-			'method_name':      'query',
-			'http_method':      'GET',
-			'path':             '/v1/groups',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def list(*args):
 
 		return Group.Clayful.call_api({

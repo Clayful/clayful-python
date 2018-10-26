@@ -12,18 +12,6 @@ class Country:
 		return Country
 
 	@staticmethod
-	def query(*args):
-
-		return Country.Clayful.call_api({
-			'model_name':       Country.name,
-			'method_name':      'query',
-			'http_method':      'GET',
-			'path':             '/v1/countries',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def list(*args):
 
 		return Country.Clayful.call_api({

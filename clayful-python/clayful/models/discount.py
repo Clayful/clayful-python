@@ -12,18 +12,6 @@ class Discount:
 		return Discount
 
 	@staticmethod
-	def query(*args):
-
-		return Discount.Clayful.call_api({
-			'model_name':       Discount.name,
-			'method_name':      'query',
-			'http_method':      'GET',
-			'path':             '/v1/discounts',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def list(*args):
 
 		return Discount.Clayful.call_api({
@@ -60,13 +48,13 @@ class Discount:
 		})
 
 	@staticmethod
-	def pull_from_metafield(*args):
+	def push_to_metafield(*args):
 
 		return Discount.Clayful.call_api({
 			'model_name':       Discount.name,
-			'method_name':      'pull_from_metafield',
+			'method_name':      'push_to_metafield',
 			'http_method':      'POST',
-			'path':             '/v1/discounts/{discountId}/meta/{field}/pull',
+			'path':             '/v1/discounts/{discountId}/meta/{field}/push',
 			'params':           ('discountId', 'field', ),
 			'args':             args
 		})
@@ -84,13 +72,13 @@ class Discount:
 		})
 
 	@staticmethod
-	def push_to_metafield(*args):
+	def pull_from_metafield(*args):
 
 		return Discount.Clayful.call_api({
 			'model_name':       Discount.name,
-			'method_name':      'push_to_metafield',
+			'method_name':      'pull_from_metafield',
 			'http_method':      'POST',
-			'path':             '/v1/discounts/{discountId}/meta/{field}/push',
+			'path':             '/v1/discounts/{discountId}/meta/{field}/pull',
 			'params':           ('discountId', 'field', ),
 			'args':             args
 		})

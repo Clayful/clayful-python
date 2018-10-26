@@ -12,18 +12,6 @@ class ShippingMethod:
 		return ShippingMethod
 
 	@staticmethod
-	def query(*args):
-
-		return ShippingMethod.Clayful.call_api({
-			'model_name':       ShippingMethod.name,
-			'method_name':      'query',
-			'http_method':      'GET',
-			'path':             '/v1/shipping/methods',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def list(*args):
 
 		return ShippingMethod.Clayful.call_api({

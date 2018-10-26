@@ -12,18 +12,6 @@ class Review:
 		return Review
 
 	@staticmethod
-	def query(*args):
-
-		return Review.Clayful.call_api({
-			'model_name':       Review.name,
-			'method_name':      'query',
-			'http_method':      'GET',
-			'path':             '/v1/products/reviews',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def list(*args):
 
 		return Review.Clayful.call_api({
@@ -48,6 +36,18 @@ class Review:
 		})
 
 	@staticmethod
+	def list_published(*args):
+
+		return Review.Clayful.call_api({
+			'model_name':       Review.name,
+			'method_name':      'list_published',
+			'http_method':      'GET',
+			'path':             '/v1/products/reviews/published',
+			'params':           (),
+			'args':             args
+		})
+
+	@staticmethod
 	def get(*args):
 
 		return Review.Clayful.call_api({
@@ -60,50 +60,26 @@ class Review:
 		})
 
 	@staticmethod
-	def query_by_product(*args):
+	def count_published(*args):
 
 		return Review.Clayful.call_api({
 			'model_name':       Review.name,
-			'method_name':      'query_by_product',
+			'method_name':      'count_published',
 			'http_method':      'GET',
-			'path':             '/v1/products/{productId}/reviews',
-			'params':           ('productId', ),
+			'path':             '/v1/products/reviews/published/count',
+			'params':           (),
 			'args':             args
 		})
 
 	@staticmethod
-	def list_by_product(*args):
+	def get_published(*args):
 
 		return Review.Clayful.call_api({
 			'model_name':       Review.name,
-			'method_name':      'list_by_product',
+			'method_name':      'get_published',
 			'http_method':      'GET',
-			'path':             '/v1/products/{productId}/reviews',
-			'params':           ('productId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def query_by_customer(*args):
-
-		return Review.Clayful.call_api({
-			'model_name':       Review.name,
-			'method_name':      'query_by_customer',
-			'http_method':      'GET',
-			'path':             '/v1/customers/{customerId}/products/reviews',
-			'params':           ('customerId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def list_by_customer(*args):
-
-		return Review.Clayful.call_api({
-			'model_name':       Review.name,
-			'method_name':      'list_by_customer',
-			'http_method':      'GET',
-			'path':             '/v1/customers/{customerId}/products/reviews',
-			'params':           ('customerId', ),
+			'path':             '/v1/products/reviews/published/{reviewId}',
+			'params':           ('reviewId', ),
 			'args':             args
 		})
 
@@ -120,11 +96,11 @@ class Review:
 		})
 
 	@staticmethod
-	def create_as_me(*args):
+	def create_for_me(*args):
 
 		return Review.Clayful.call_api({
 			'model_name':       Review.name,
-			'method_name':      'create_as_me',
+			'method_name':      'create_for_me',
 			'http_method':      'POST',
 			'path':             '/v1/me/products/reviews',
 			'params':           (),
@@ -138,19 +114,19 @@ class Review:
 			'model_name':       Review.name,
 			'method_name':      'flag',
 			'http_method':      'POST',
-			'path':             '/v1/products/reviews/{reviewId}/flag',
+			'path':             '/v1/products/reviews/{reviewId}/flags',
 			'params':           ('reviewId', ),
 			'args':             args
 		})
 
 	@staticmethod
-	def flag_as_me(*args):
+	def flag_for_me(*args):
 
 		return Review.Clayful.call_api({
 			'model_name':       Review.name,
-			'method_name':      'flag_as_me',
+			'method_name':      'flag_for_me',
 			'http_method':      'POST',
-			'path':             '/v1/me/products/reviews/{reviewId}/flag',
+			'path':             '/v1/me/products/reviews/{reviewId}/flags',
 			'params':           ('reviewId', ),
 			'without_payload':  True,
 			'args':             args
@@ -169,52 +145,15 @@ class Review:
 		})
 
 	@staticmethod
-	def cancel_flag(*args):
+	def helped_for_me(*args):
 
 		return Review.Clayful.call_api({
 			'model_name':       Review.name,
-			'method_name':      'cancel_flag',
-			'http_method':      'POST',
-			'path':             '/v1/products/reviews/{reviewId}/flag/cancel',
-			'params':           ('reviewId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def cancel_flag_as_me(*args):
-
-		return Review.Clayful.call_api({
-			'model_name':       Review.name,
-			'method_name':      'cancel_flag_as_me',
-			'http_method':      'POST',
-			'path':             '/v1/me/products/reviews/{reviewId}/flag/cancel',
-			'params':           ('reviewId', ),
-			'without_payload':  True,
-			'args':             args
-		})
-
-	@staticmethod
-	def helped_as_me(*args):
-
-		return Review.Clayful.call_api({
-			'model_name':       Review.name,
-			'method_name':      'helped_as_me',
+			'method_name':      'helped_for_me',
 			'http_method':      'POST',
 			'path':             '/v1/me/products/reviews/{reviewId}/helped/{upDown}',
 			'params':           ('reviewId', 'upDown', ),
 			'without_payload':  True,
-			'args':             args
-		})
-
-	@staticmethod
-	def push_to_metafield(*args):
-
-		return Review.Clayful.call_api({
-			'model_name':       Review.name,
-			'method_name':      'push_to_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/products/reviews/{reviewId}/meta/{field}/push',
-			'params':           ('reviewId', 'field', ),
 			'args':             args
 		})
 
@@ -231,18 +170,6 @@ class Review:
 		})
 
 	@staticmethod
-	def cancel_helped(*args):
-
-		return Review.Clayful.call_api({
-			'model_name':       Review.name,
-			'method_name':      'cancel_helped',
-			'http_method':      'POST',
-			'path':             '/v1/products/reviews/{reviewId}/helped/{upDown}/cancel',
-			'params':           ('reviewId', 'upDown', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def increase_metafield(*args):
 
 		return Review.Clayful.call_api({
@@ -255,15 +182,14 @@ class Review:
 		})
 
 	@staticmethod
-	def cancel_helped_as_me(*args):
+	def push_to_metafield(*args):
 
 		return Review.Clayful.call_api({
 			'model_name':       Review.name,
-			'method_name':      'cancel_helped_as_me',
+			'method_name':      'push_to_metafield',
 			'http_method':      'POST',
-			'path':             '/v1/me/products/reviews/{reviewId}/helped/{upDown}/cancel',
-			'params':           ('reviewId', 'upDown', ),
-			'without_payload':  True,
+			'path':             '/v1/products/reviews/{reviewId}/meta/{field}/push',
+			'params':           ('reviewId', 'field', ),
 			'args':             args
 		})
 
@@ -280,26 +206,14 @@ class Review:
 		})
 
 	@staticmethod
-	def update_as_me(*args):
+	def update_for_me(*args):
 
 		return Review.Clayful.call_api({
 			'model_name':       Review.name,
-			'method_name':      'update_as_me',
+			'method_name':      'update_for_me',
 			'http_method':      'PUT',
 			'path':             '/v1/me/products/reviews/{reviewId}',
 			'params':           ('reviewId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def update_as_customer(*args):
-
-		return Review.Clayful.call_api({
-			'model_name':       Review.name,
-			'method_name':      'update_as_customer',
-			'http_method':      'PUT',
-			'path':             '/v1/customers/{customerId}/products/reviews/{reviewId}',
-			'params':           ('customerId', 'reviewId', ),
 			'args':             args
 		})
 
@@ -316,14 +230,38 @@ class Review:
 		})
 
 	@staticmethod
-	def delete_as_me(*args):
+	def delete_for_me(*args):
 
 		return Review.Clayful.call_api({
 			'model_name':       Review.name,
-			'method_name':      'delete_as_me',
+			'method_name':      'delete_for_me',
 			'http_method':      'DELETE',
 			'path':             '/v1/me/products/reviews/{reviewId}',
 			'params':           ('reviewId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def cancel_flag_for_me(*args):
+
+		return Review.Clayful.call_api({
+			'model_name':       Review.name,
+			'method_name':      'cancel_flag_for_me',
+			'http_method':      'DELETE',
+			'path':             '/v1/me/products/reviews/{reviewId}/flags',
+			'params':           ('reviewId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def cancel_flag(*args):
+
+		return Review.Clayful.call_api({
+			'model_name':       Review.name,
+			'method_name':      'cancel_flag',
+			'http_method':      'DELETE',
+			'path':             '/v1/products/reviews/{reviewId}/flags/{customerId}',
+			'params':           ('reviewId', 'customerId', ),
 			'args':             args
 		})
 
@@ -336,6 +274,30 @@ class Review:
 			'http_method':      'DELETE',
 			'path':             '/v1/products/reviews/{reviewId}/meta/{field}',
 			'params':           ('reviewId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def cancel_helped_for_me(*args):
+
+		return Review.Clayful.call_api({
+			'model_name':       Review.name,
+			'method_name':      'cancel_helped_for_me',
+			'http_method':      'DELETE',
+			'path':             '/v1/me/products/reviews/{reviewId}/helped/{upDown}',
+			'params':           ('reviewId', 'upDown', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def cancel_helped(*args):
+
+		return Review.Clayful.call_api({
+			'model_name':       Review.name,
+			'method_name':      'cancel_helped',
+			'http_method':      'DELETE',
+			'path':             '/v1/products/reviews/{reviewId}/helped/{upDown}/{customerId}',
+			'params':           ('reviewId', 'upDown', 'customerId', ),
 			'args':             args
 		})
 
