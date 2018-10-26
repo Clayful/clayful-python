@@ -1,7 +1,7 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
-	name             = 'clayful-python',
+	name             = 'clayful',
 	version          = '0.0.0',
 	description      = 'Python SDK for Clayful API',
 	long_description = open('README.md').read(),
@@ -10,7 +10,7 @@ setup(
 	url              = 'https://github.com/Clayful/clayful-python',
 	keywords         = 'eCommerce clayful',
 	license          = 'MIT',
-	packages         = ['clayful'],
+	packages         = find_packages(),
 	install_requires = [
 		'requests>2.1,<3'
 	],
