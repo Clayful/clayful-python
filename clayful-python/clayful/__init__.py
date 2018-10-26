@@ -76,7 +76,7 @@ class Clayful:
 
 				copied[key] = str(copied[key])
 
-			copied[key] = urllib.quote(copied[key])
+			copied[key] = urllib.quote(copied[key]).replace('%2C', ',')
 
 		return copied
 
