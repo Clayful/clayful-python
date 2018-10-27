@@ -88,7 +88,7 @@ class ClayfulMainModuleTest(unittest.TestCase):
 			'string':  'string',
 			'number':  '100',
 			'boolean': 'true',
-			'special': '%20%2B%26',
+			'special': ' +&',
 		})
 
 
