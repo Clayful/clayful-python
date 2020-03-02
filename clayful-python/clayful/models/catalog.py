@@ -48,13 +48,13 @@ class Catalog:
 		})
 
 	@staticmethod
-	def pull_from_metafield(*args):
+	def push_to_metafield(*args):
 
 		return Catalog.Clayful.call_api({
 			'model_name':       Catalog.name,
-			'method_name':      'pull_from_metafield',
+			'method_name':      'push_to_metafield',
 			'http_method':      'POST',
-			'path':             '/v1/catalogs/{catalogId}/meta/{field}/pull',
+			'path':             '/v1/catalogs/{catalogId}/meta/{field}/push',
 			'params':           ('catalogId', 'field', ),
 			'args':             args
 		})
@@ -72,13 +72,13 @@ class Catalog:
 		})
 
 	@staticmethod
-	def push_to_metafield(*args):
+	def pull_from_metafield(*args):
 
 		return Catalog.Clayful.call_api({
 			'model_name':       Catalog.name,
-			'method_name':      'push_to_metafield',
+			'method_name':      'pull_from_metafield',
 			'http_method':      'POST',
-			'path':             '/v1/catalogs/{catalogId}/meta/{field}/push',
+			'path':             '/v1/catalogs/{catalogId}/meta/{field}/pull',
 			'params':           ('catalogId', 'field', ),
 			'args':             args
 		})

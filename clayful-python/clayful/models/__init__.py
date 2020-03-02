@@ -10,7 +10,6 @@ from clayful.models.discount import Discount
 from clayful.models.downloadable import Downloadable
 from clayful.models.group import Group
 from clayful.models.image import Image
-from clayful.models.impression import Impression
 from clayful.models.order import Order
 from clayful.models.order_tag import OrderTag
 from clayful.models.payment_method import PaymentMethod
@@ -22,7 +21,7 @@ from clayful.models.store import Store
 from clayful.models.subscription import Subscription
 from clayful.models.subscription_plan import SubscriptionPlan
 from clayful.models.tax_category import TaxCategory
-from clayful.models.tracker import Tracker
+from clayful.models.vendor import Vendor
 from clayful.models.wish_list import WishList
 
 def register_models(clayful):
@@ -39,7 +38,6 @@ def register_models(clayful):
 	setattr(clayful, 'Downloadable', Downloadable.config(clayful))
 	setattr(clayful, 'Group', Group.config(clayful))
 	setattr(clayful, 'Image', Image.config(clayful))
-	setattr(clayful, 'Impression', Impression.config(clayful))
 	setattr(clayful, 'Order', Order.config(clayful))
 	setattr(clayful, 'OrderTag', OrderTag.config(clayful))
 	setattr(clayful, 'PaymentMethod', PaymentMethod.config(clayful))
@@ -51,5 +49,5 @@ def register_models(clayful):
 	setattr(clayful, 'Subscription', Subscription.config(clayful))
 	setattr(clayful, 'SubscriptionPlan', SubscriptionPlan.config(clayful))
 	setattr(clayful, 'TaxCategory', TaxCategory.config(clayful))
-	setattr(clayful, 'Tracker', Tracker.config(clayful))
+	setattr(clayful, 'Vendor', Vendor.config(clayful))
 	setattr(clayful, 'WishList', WishList.config(clayful))

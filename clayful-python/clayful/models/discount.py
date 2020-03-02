@@ -60,18 +60,6 @@ class Discount:
 		})
 
 	@staticmethod
-	def increase_metafield(*args):
-
-		return Discount.Clayful.call_api({
-			'model_name':       Discount.name,
-			'method_name':      'increase_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/discounts/{discountId}/meta/{field}/inc',
-			'params':           ('discountId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def pull_from_metafield(*args):
 
 		return Discount.Clayful.call_api({
@@ -79,6 +67,18 @@ class Discount:
 			'method_name':      'pull_from_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/discounts/{discountId}/meta/{field}/pull',
+			'params':           ('discountId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def increase_metafield(*args):
+
+		return Discount.Clayful.call_api({
+			'model_name':       Discount.name,
+			'method_name':      'increase_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/discounts/{discountId}/meta/{field}/inc',
 			'params':           ('discountId', 'field', ),
 			'args':             args
 		})

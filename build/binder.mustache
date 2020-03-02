@@ -2,7 +2,7 @@
 from clayful.models.{{moduleName}} import {{className}}
 {{/.}}
 
-def register(clayful):
+def register_models(clayful):
 
 {{#.}}
 	setattr(clayful, '{{className}}', {{className}}.config(clayful))

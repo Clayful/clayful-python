@@ -48,13 +48,13 @@ class Collection:
 		})
 
 	@staticmethod
-	def push_to_metafield(*args):
+	def pull_from_metafield(*args):
 
 		return Collection.Clayful.call_api({
 			'model_name':       Collection.name,
-			'method_name':      'push_to_metafield',
+			'method_name':      'pull_from_metafield',
 			'http_method':      'POST',
-			'path':             '/v1/collections/{collectionId}/meta/{field}/push',
+			'path':             '/v1/collections/{collectionId}/meta/{field}/pull',
 			'params':           ('collectionId', 'field', ),
 			'args':             args
 		})
@@ -72,13 +72,13 @@ class Collection:
 		})
 
 	@staticmethod
-	def pull_from_metafield(*args):
+	def push_to_metafield(*args):
 
 		return Collection.Clayful.call_api({
 			'model_name':       Collection.name,
-			'method_name':      'pull_from_metafield',
+			'method_name':      'push_to_metafield',
 			'http_method':      'POST',
-			'path':             '/v1/collections/{collectionId}/meta/{field}/pull',
+			'path':             '/v1/collections/{collectionId}/meta/{field}/push',
 			'params':           ('collectionId', 'field', ),
 			'args':             args
 		})
