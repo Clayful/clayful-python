@@ -99,16 +99,10 @@ class Clayful:
 
 		if (options['http_method'] == 'POST' or options['http_method'] == 'PUT') and (options.get('without_payload', False) == False):
 
-			result['payload'] = rest[0]
+			result['payload'] = (rest[0:1] or (None,))[0]
 			rest = rest[1:]
 
-		query_headers = {}
-
-		try:
-			query_headers = rest[0]
-
-		except IndexError:
-			query_headers = {}
+		query_headers = (rest[0:1] or ({},))[0]
 
 		result['query'] = Clayful.normalize_query_values(query_headers.get('query', {}))
 		result['headers'] = Clayful.options_to_headers(query_headers)
