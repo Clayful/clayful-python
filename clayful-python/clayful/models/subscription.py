@@ -120,6 +120,19 @@ class Subscription:
 		})
 
 	@staticmethod
+	def mark_as_done(*args):
+
+		return Subscription.Clayful.call_api({
+			'model_name':       Subscription.name,
+			'method_name':      'mark_as_done',
+			'http_method':      'POST',
+			'path':             '/v1/subscriptions/{subscriptionId}/done',
+			'params':           ('subscriptionId', ),
+			'without_payload':  True,
+			'args':             args
+		})
+
+	@staticmethod
 	def schedule(*args):
 
 		return Subscription.Clayful.call_api({
@@ -139,19 +152,6 @@ class Subscription:
 			'method_name':      'sync_inventory',
 			'http_method':      'POST',
 			'path':             '/v1/subscriptions/{subscriptionId}/synced',
-			'params':           ('subscriptionId', ),
-			'without_payload':  True,
-			'args':             args
-		})
-
-	@staticmethod
-	def mark_as_done(*args):
-
-		return Subscription.Clayful.call_api({
-			'model_name':       Subscription.name,
-			'method_name':      'mark_as_done',
-			'http_method':      'POST',
-			'path':             '/v1/subscriptions/{subscriptionId}/done',
 			'params':           ('subscriptionId', ),
 			'without_payload':  True,
 			'args':             args
@@ -194,18 +194,6 @@ class Subscription:
 		})
 
 	@staticmethod
-	def increase_metafield(*args):
-
-		return Subscription.Clayful.call_api({
-			'model_name':       Subscription.name,
-			'method_name':      'increase_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/subscriptions/{subscriptionId}/meta/{field}/inc',
-			'params':           ('subscriptionId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def push_to_metafield(*args):
 
 		return Subscription.Clayful.call_api({
@@ -225,6 +213,18 @@ class Subscription:
 			'method_name':      'pull_from_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/subscriptions/{subscriptionId}/meta/{field}/pull',
+			'params':           ('subscriptionId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def increase_metafield(*args):
+
+		return Subscription.Clayful.call_api({
+			'model_name':       Subscription.name,
+			'method_name':      'increase_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/subscriptions/{subscriptionId}/meta/{field}/inc',
 			'params':           ('subscriptionId', 'field', ),
 			'args':             args
 		})

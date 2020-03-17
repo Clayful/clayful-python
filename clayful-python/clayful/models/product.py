@@ -48,6 +48,30 @@ class Product:
 		})
 
 	@staticmethod
+	def create(*args):
+
+		return Product.Clayful.call_api({
+			'model_name':       Product.name,
+			'method_name':      'create',
+			'http_method':      'POST',
+			'path':             '/v1/products',
+			'params':           (),
+			'args':             args
+		})
+
+	@staticmethod
+	def create_variant(*args):
+
+		return Product.Clayful.call_api({
+			'model_name':       Product.name,
+			'method_name':      'create_variant',
+			'http_method':      'POST',
+			'path':             '/v1/products/{productId}/variants',
+			'params':           ('productId', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def increase_metafield(*args):
 
 		return Product.Clayful.call_api({
@@ -72,6 +96,18 @@ class Product:
 		})
 
 	@staticmethod
+	def create_variation(*args):
+
+		return Product.Clayful.call_api({
+			'model_name':       Product.name,
+			'method_name':      'create_variation',
+			'http_method':      'POST',
+			'path':             '/v1/products/{productId}/options/{optionId}/variations',
+			'params':           ('productId', 'optionId', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def push_to_metafield(*args):
 
 		return Product.Clayful.call_api({
@@ -84,6 +120,66 @@ class Product:
 		})
 
 	@staticmethod
+	def update(*args):
+
+		return Product.Clayful.call_api({
+			'model_name':       Product.name,
+			'method_name':      'update',
+			'http_method':      'PUT',
+			'path':             '/v1/products/{productId}',
+			'params':           ('productId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def update_option(*args):
+
+		return Product.Clayful.call_api({
+			'model_name':       Product.name,
+			'method_name':      'update_option',
+			'http_method':      'PUT',
+			'path':             '/v1/products/{productId}/options/{optionId}',
+			'params':           ('productId', 'optionId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def update_variant(*args):
+
+		return Product.Clayful.call_api({
+			'model_name':       Product.name,
+			'method_name':      'update_variant',
+			'http_method':      'PUT',
+			'path':             '/v1/products/{productId}/variants/{variantId}',
+			'params':           ('productId', 'variantId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def update_variation(*args):
+
+		return Product.Clayful.call_api({
+			'model_name':       Product.name,
+			'method_name':      'update_variation',
+			'http_method':      'PUT',
+			'path':             '/v1/products/{productId}/options/{optionId}/variations/{variationId}',
+			'params':           ('productId', 'optionId', 'variationId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def delete(*args):
+
+		return Product.Clayful.call_api({
+			'model_name':       Product.name,
+			'method_name':      'delete',
+			'http_method':      'DELETE',
+			'path':             '/v1/products/{productId}',
+			'params':           ('productId', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def delete_metafield(*args):
 
 		return Product.Clayful.call_api({
@@ -92,6 +188,30 @@ class Product:
 			'http_method':      'DELETE',
 			'path':             '/v1/products/{productId}/meta/{field}',
 			'params':           ('productId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def delete_variant(*args):
+
+		return Product.Clayful.call_api({
+			'model_name':       Product.name,
+			'method_name':      'delete_variant',
+			'http_method':      'DELETE',
+			'path':             '/v1/products/{productId}/variants/{variantId}',
+			'params':           ('productId', 'variantId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def delete_variation(*args):
+
+		return Product.Clayful.call_api({
+			'model_name':       Product.name,
+			'method_name':      'delete_variation',
+			'http_method':      'DELETE',
+			'path':             '/v1/products/{productId}/options/{optionId}/variations/{variationId}',
+			'params':           ('productId', 'optionId', 'variationId', ),
 			'args':             args
 		})
 

@@ -180,18 +180,6 @@ class WishList:
 		})
 
 	@staticmethod
-	def pull_from_metafield(*args):
-
-		return WishList.Clayful.call_api({
-			'model_name':       WishList.name,
-			'method_name':      'pull_from_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/wishlists/{wishListId}/meta/{field}/pull',
-			'params':           ('wishListId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def push_to_metafield(*args):
 
 		return WishList.Clayful.call_api({
@@ -199,6 +187,18 @@ class WishList:
 			'method_name':      'push_to_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/wishlists/{wishListId}/meta/{field}/push',
+			'params':           ('wishListId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def pull_from_metafield(*args):
+
+		return WishList.Clayful.call_api({
+			'model_name':       WishList.name,
+			'method_name':      'pull_from_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/wishlists/{wishListId}/meta/{field}/pull',
 			'params':           ('wishListId', 'field', ),
 			'args':             args
 		})
@@ -288,18 +288,6 @@ class WishList:
 		})
 
 	@staticmethod
-	def delete_metafield(*args):
-
-		return WishList.Clayful.call_api({
-			'model_name':       WishList.name,
-			'method_name':      'delete_metafield',
-			'http_method':      'DELETE',
-			'path':             '/v1/wishlists/{wishListId}/meta/{field}',
-			'params':           ('wishListId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def delete_item(*args):
 
 		return WishList.Clayful.call_api({
@@ -308,6 +296,18 @@ class WishList:
 			'http_method':      'DELETE',
 			'path':             '/v1/wishlists/{wishListId}/items/{productId}',
 			'params':           ('wishListId', 'productId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def delete_metafield(*args):
+
+		return WishList.Clayful.call_api({
+			'model_name':       WishList.name,
+			'method_name':      'delete_metafield',
+			'http_method':      'DELETE',
+			'path':             '/v1/wishlists/{wishListId}/meta/{field}',
+			'params':           ('wishListId', 'field', ),
 			'args':             args
 		})
 
