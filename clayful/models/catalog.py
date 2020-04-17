@@ -60,18 +60,6 @@ class Catalog:
 		})
 
 	@staticmethod
-	def increase_metafield(*args):
-
-		return Catalog.Clayful.call_api({
-			'model_name':       Catalog.name,
-			'method_name':      'increase_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/catalogs/{catalogId}/meta/{field}/inc',
-			'params':           ('catalogId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def push_to_metafield(*args):
 
 		return Catalog.Clayful.call_api({
@@ -79,6 +67,18 @@ class Catalog:
 			'method_name':      'push_to_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/catalogs/{catalogId}/meta/{field}/push',
+			'params':           ('catalogId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def increase_metafield(*args):
+
+		return Catalog.Clayful.call_api({
+			'model_name':       Catalog.name,
+			'method_name':      'increase_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/catalogs/{catalogId}/meta/{field}/inc',
 			'params':           ('catalogId', 'field', ),
 			'args':             args
 		})

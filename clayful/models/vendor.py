@@ -60,13 +60,13 @@ class Vendor:
 		})
 
 	@staticmethod
-	def pull_from_metafield(*args):
+	def push_to_metafield(*args):
 
 		return Vendor.Clayful.call_api({
 			'model_name':       Vendor.name,
-			'method_name':      'pull_from_metafield',
+			'method_name':      'push_to_metafield',
 			'http_method':      'POST',
-			'path':             '/v1/vendors/{vendorId}/meta/{field}/pull',
+			'path':             '/v1/vendors/{vendorId}/meta/{field}/push',
 			'params':           ('vendorId', 'field', ),
 			'args':             args
 		})
@@ -84,13 +84,13 @@ class Vendor:
 		})
 
 	@staticmethod
-	def push_to_metafield(*args):
+	def pull_from_metafield(*args):
 
 		return Vendor.Clayful.call_api({
 			'model_name':       Vendor.name,
-			'method_name':      'push_to_metafield',
+			'method_name':      'pull_from_metafield',
 			'http_method':      'POST',
-			'path':             '/v1/vendors/{vendorId}/meta/{field}/push',
+			'path':             '/v1/vendors/{vendorId}/meta/{field}/pull',
 			'params':           ('vendorId', 'field', ),
 			'args':             args
 		})

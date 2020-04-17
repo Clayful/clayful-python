@@ -180,6 +180,18 @@ class WishList:
 		})
 
 	@staticmethod
+	def increase_metafield(*args):
+
+		return WishList.Clayful.call_api({
+			'model_name':       WishList.name,
+			'method_name':      'increase_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/wishlists/{wishListId}/meta/{field}/inc',
+			'params':           ('wishListId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def push_to_metafield(*args):
 
 		return WishList.Clayful.call_api({
@@ -199,18 +211,6 @@ class WishList:
 			'method_name':      'pull_from_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/wishlists/{wishListId}/meta/{field}/pull',
-			'params':           ('wishListId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def increase_metafield(*args):
-
-		return WishList.Clayful.call_api({
-			'model_name':       WishList.name,
-			'method_name':      'increase_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/wishlists/{wishListId}/meta/{field}/inc',
 			'params':           ('wishListId', 'field', ),
 			'args':             args
 		})
