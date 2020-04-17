@@ -48,13 +48,25 @@ class Collection:
 		})
 
 	@staticmethod
-	def pull_from_metafield(*args):
+	def create(*args):
 
 		return Collection.Clayful.call_api({
 			'model_name':       Collection.name,
-			'method_name':      'pull_from_metafield',
+			'method_name':      'create',
 			'http_method':      'POST',
-			'path':             '/v1/collections/{collectionId}/meta/{field}/pull',
+			'path':             '/v1/collections',
+			'params':           (),
+			'args':             args
+		})
+
+	@staticmethod
+	def push_to_metafield(*args):
+
+		return Collection.Clayful.call_api({
+			'model_name':       Collection.name,
+			'method_name':      'push_to_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/collections/{collectionId}/meta/{field}/push',
 			'params':           ('collectionId', 'field', ),
 			'args':             args
 		})
@@ -72,14 +84,38 @@ class Collection:
 		})
 
 	@staticmethod
-	def push_to_metafield(*args):
+	def pull_from_metafield(*args):
 
 		return Collection.Clayful.call_api({
 			'model_name':       Collection.name,
-			'method_name':      'push_to_metafield',
+			'method_name':      'pull_from_metafield',
 			'http_method':      'POST',
-			'path':             '/v1/collections/{collectionId}/meta/{field}/push',
+			'path':             '/v1/collections/{collectionId}/meta/{field}/pull',
 			'params':           ('collectionId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def update(*args):
+
+		return Collection.Clayful.call_api({
+			'model_name':       Collection.name,
+			'method_name':      'update',
+			'http_method':      'PUT',
+			'path':             '/v1/collections/{collectionId}',
+			'params':           ('collectionId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def delete(*args):
+
+		return Collection.Clayful.call_api({
+			'model_name':       Collection.name,
+			'method_name':      'delete',
+			'http_method':      'DELETE',
+			'path':             '/v1/collections/{collectionId}',
+			'params':           ('collectionId', ),
 			'args':             args
 		})
 

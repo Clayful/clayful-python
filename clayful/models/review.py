@@ -158,18 +158,6 @@ class Review:
 		})
 
 	@staticmethod
-	def pull_from_metafield(*args):
-
-		return Review.Clayful.call_api({
-			'model_name':       Review.name,
-			'method_name':      'pull_from_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/products/reviews/{reviewId}/meta/{field}/pull',
-			'params':           ('reviewId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def increase_metafield(*args):
 
 		return Review.Clayful.call_api({
@@ -189,6 +177,18 @@ class Review:
 			'method_name':      'push_to_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/products/reviews/{reviewId}/meta/{field}/push',
+			'params':           ('reviewId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def pull_from_metafield(*args):
+
+		return Review.Clayful.call_api({
+			'model_name':       Review.name,
+			'method_name':      'pull_from_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/products/reviews/{reviewId}/meta/{field}/pull',
 			'params':           ('reviewId', 'field', ),
 			'args':             args
 		})
@@ -254,18 +254,6 @@ class Review:
 		})
 
 	@staticmethod
-	def cancel_flag(*args):
-
-		return Review.Clayful.call_api({
-			'model_name':       Review.name,
-			'method_name':      'cancel_flag',
-			'http_method':      'DELETE',
-			'path':             '/v1/products/reviews/{reviewId}/flags/{customerId}',
-			'params':           ('reviewId', 'customerId', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def delete_metafield(*args):
 
 		return Review.Clayful.call_api({
@@ -274,6 +262,18 @@ class Review:
 			'http_method':      'DELETE',
 			'path':             '/v1/products/reviews/{reviewId}/meta/{field}',
 			'params':           ('reviewId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def cancel_flag(*args):
+
+		return Review.Clayful.call_api({
+			'model_name':       Review.name,
+			'method_name':      'cancel_flag',
+			'http_method':      'DELETE',
+			'path':             '/v1/products/reviews/{reviewId}/flags/{customerId}',
+			'params':           ('reviewId', 'customerId', ),
 			'args':             args
 		})
 

@@ -48,14 +48,14 @@ class Brand:
 		})
 
 	@staticmethod
-	def pull_from_metafield(*args):
+	def create(*args):
 
 		return Brand.Clayful.call_api({
 			'model_name':       Brand.name,
-			'method_name':      'pull_from_metafield',
+			'method_name':      'create',
 			'http_method':      'POST',
-			'path':             '/v1/brands/{brandId}/meta/{field}/pull',
-			'params':           ('brandId', 'field', ),
+			'path':             '/v1/brands',
+			'params':           (),
 			'args':             args
 		})
 
@@ -72,6 +72,18 @@ class Brand:
 		})
 
 	@staticmethod
+	def pull_from_metafield(*args):
+
+		return Brand.Clayful.call_api({
+			'model_name':       Brand.name,
+			'method_name':      'pull_from_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/brands/{brandId}/meta/{field}/pull',
+			'params':           ('brandId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def push_to_metafield(*args):
 
 		return Brand.Clayful.call_api({
@@ -80,6 +92,30 @@ class Brand:
 			'http_method':      'POST',
 			'path':             '/v1/brands/{brandId}/meta/{field}/push',
 			'params':           ('brandId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def update(*args):
+
+		return Brand.Clayful.call_api({
+			'model_name':       Brand.name,
+			'method_name':      'update',
+			'http_method':      'PUT',
+			'path':             '/v1/brands/{brandId}',
+			'params':           ('brandId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def delete(*args):
+
+		return Brand.Clayful.call_api({
+			'model_name':       Brand.name,
+			'method_name':      'delete',
+			'http_method':      'DELETE',
+			'path':             '/v1/brands/{brandId}',
+			'params':           ('brandId', ),
 			'args':             args
 		})
 

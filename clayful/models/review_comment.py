@@ -97,18 +97,6 @@ class ReviewComment:
 		})
 
 	@staticmethod
-	def increase_metafield(*args):
-
-		return ReviewComment.Clayful.call_api({
-			'model_name':       ReviewComment.name,
-			'method_name':      'increase_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/products/reviews/comments/{reviewCommentId}/meta/{field}/inc',
-			'params':           ('reviewCommentId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def pull_from_metafield(*args):
 
 		return ReviewComment.Clayful.call_api({
@@ -116,6 +104,18 @@ class ReviewComment:
 			'method_name':      'pull_from_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/products/reviews/comments/{reviewCommentId}/meta/{field}/pull',
+			'params':           ('reviewCommentId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def increase_metafield(*args):
+
+		return ReviewComment.Clayful.call_api({
+			'model_name':       ReviewComment.name,
+			'method_name':      'increase_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/products/reviews/comments/{reviewCommentId}/meta/{field}/inc',
 			'params':           ('reviewCommentId', 'field', ),
 			'args':             args
 		})
@@ -193,18 +193,6 @@ class ReviewComment:
 		})
 
 	@staticmethod
-	def cancel_flag(*args):
-
-		return ReviewComment.Clayful.call_api({
-			'model_name':       ReviewComment.name,
-			'method_name':      'cancel_flag',
-			'http_method':      'DELETE',
-			'path':             '/v1/products/reviews/comments/{reviewCommentId}/flags/{customerId}',
-			'params':           ('reviewCommentId', 'customerId', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def delete_metafield(*args):
 
 		return ReviewComment.Clayful.call_api({
@@ -213,6 +201,18 @@ class ReviewComment:
 			'http_method':      'DELETE',
 			'path':             '/v1/products/reviews/comments/{reviewCommentId}/meta/{field}',
 			'params':           ('reviewCommentId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def cancel_flag(*args):
+
+		return ReviewComment.Clayful.call_api({
+			'model_name':       ReviewComment.name,
+			'method_name':      'cancel_flag',
+			'http_method':      'DELETE',
+			'path':             '/v1/products/reviews/comments/{reviewCommentId}/flags/{customerId}',
+			'params':           ('reviewCommentId', 'customerId', ),
 			'args':             args
 		})
 

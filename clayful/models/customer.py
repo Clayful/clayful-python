@@ -253,18 +253,6 @@ class Customer:
 		})
 
 	@staticmethod
-	def add_coupon(*args):
-
-		return Customer.Clayful.call_api({
-			'model_name':       Customer.name,
-			'method_name':      'add_coupon',
-			'http_method':      'POST',
-			'path':             '/v1/customers/{customerId}/coupons',
-			'params':           ('customerId', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def verify(*args):
 
 		return Customer.Clayful.call_api({
@@ -272,6 +260,18 @@ class Customer:
 			'method_name':      'verify',
 			'http_method':      'POST',
 			'path':             '/v1/customers/{customerId}/verified',
+			'params':           ('customerId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def add_coupon(*args):
+
+		return Customer.Clayful.call_api({
+			'model_name':       Customer.name,
+			'method_name':      'add_coupon',
+			'http_method':      'POST',
+			'path':             '/v1/customers/{customerId}/coupons',
 			'params':           ('customerId', ),
 			'args':             args
 		})
@@ -289,18 +289,6 @@ class Customer:
 		})
 
 	@staticmethod
-	def pull_from_metafield(*args):
-
-		return Customer.Clayful.call_api({
-			'model_name':       Customer.name,
-			'method_name':      'pull_from_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/customers/{customerId}/meta/{field}/pull',
-			'params':           ('customerId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def increase_metafield(*args):
 
 		return Customer.Clayful.call_api({
@@ -308,6 +296,18 @@ class Customer:
 			'method_name':      'increase_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/customers/{customerId}/meta/{field}/inc',
+			'params':           ('customerId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def pull_from_metafield(*args):
+
+		return Customer.Clayful.call_api({
+			'model_name':       Customer.name,
+			'method_name':      'pull_from_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/customers/{customerId}/meta/{field}/pull',
 			'params':           ('customerId', 'field', ),
 			'args':             args
 		})
@@ -349,18 +349,6 @@ class Customer:
 		})
 
 	@staticmethod
-	def reset_password(*args):
-
-		return Customer.Clayful.call_api({
-			'model_name':       Customer.name,
-			'method_name':      'reset_password',
-			'http_method':      'PUT',
-			'path':             '/v1/customers/{customerId}/password',
-			'params':           ('customerId', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def update_credentials(*args):
 
 		return Customer.Clayful.call_api({
@@ -368,6 +356,18 @@ class Customer:
 			'method_name':      'update_credentials',
 			'http_method':      'PUT',
 			'path':             '/v1/customers/{customerId}/credentials',
+			'params':           ('customerId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def reset_password(*args):
+
+		return Customer.Clayful.call_api({
+			'model_name':       Customer.name,
+			'method_name':      'reset_password',
+			'http_method':      'PUT',
+			'path':             '/v1/customers/{customerId}/password',
 			'params':           ('customerId', ),
 			'args':             args
 		})
