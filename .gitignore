@@ -1,8 +1,8 @@
 # Clayful
 *.pyc
-clayful-python/build
-clayful-python/dist
-clayful-python/clayful.egg-info
+build
+dist
+clayful.egg-info
 
 
 # Logs
