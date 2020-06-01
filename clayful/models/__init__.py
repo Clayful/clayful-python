@@ -17,6 +17,7 @@ from clayful.models.product import Product
 from clayful.models.review import Review
 from clayful.models.review_comment import ReviewComment
 from clayful.models.shipping_method import ShippingMethod
+from clayful.models.shipping_policy import ShippingPolicy
 from clayful.models.store import Store
 from clayful.models.subscription import Subscription
 from clayful.models.subscription_plan import SubscriptionPlan
@@ -45,6 +46,7 @@ def register_models(clayful):
 	setattr(clayful, 'Review', Review.config(clayful))
 	setattr(clayful, 'ReviewComment', ReviewComment.config(clayful))
 	setattr(clayful, 'ShippingMethod', ShippingMethod.config(clayful))
+	setattr(clayful, 'ShippingPolicy', ShippingPolicy.config(clayful))
 	setattr(clayful, 'Store', Store.config(clayful))
 	setattr(clayful, 'Subscription', Subscription.config(clayful))
 	setattr(clayful, 'SubscriptionPlan', SubscriptionPlan.config(clayful))
