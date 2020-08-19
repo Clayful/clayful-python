@@ -24,18 +24,6 @@ class Store:
 		})
 
 	@staticmethod
-	def pull_from_metafield(*args):
-
-		return Store.Clayful.call_api({
-			'model_name':       Store.name,
-			'method_name':      'pull_from_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/store/meta/{field}/pull',
-			'params':           ('field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def increase_metafield(*args):
 
 		return Store.Clayful.call_api({
@@ -43,6 +31,18 @@ class Store:
 			'method_name':      'increase_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/store/meta/{field}/inc',
+			'params':           ('field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def pull_from_metafield(*args):
+
+		return Store.Clayful.call_api({
+			'model_name':       Store.name,
+			'method_name':      'pull_from_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/store/meta/{field}/pull',
 			'params':           ('field', ),
 			'args':             args
 		})

@@ -48,6 +48,30 @@ class Catalog:
 		})
 
 	@staticmethod
+	def create(*args):
+
+		return Catalog.Clayful.call_api({
+			'model_name':       Catalog.name,
+			'method_name':      'create',
+			'http_method':      'POST',
+			'path':             '/v1/catalogs',
+			'params':           (),
+			'args':             args
+		})
+
+	@staticmethod
+	def increase_metafield(*args):
+
+		return Catalog.Clayful.call_api({
+			'model_name':       Catalog.name,
+			'method_name':      'increase_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/catalogs/{catalogId}/meta/{field}/inc',
+			'params':           ('catalogId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def pull_from_metafield(*args):
 
 		return Catalog.Clayful.call_api({
@@ -72,14 +96,26 @@ class Catalog:
 		})
 
 	@staticmethod
-	def increase_metafield(*args):
+	def update(*args):
 
 		return Catalog.Clayful.call_api({
 			'model_name':       Catalog.name,
-			'method_name':      'increase_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/catalogs/{catalogId}/meta/{field}/inc',
-			'params':           ('catalogId', 'field', ),
+			'method_name':      'update',
+			'http_method':      'PUT',
+			'path':             '/v1/catalogs/{catalogId}',
+			'params':           ('catalogId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def delete(*args):
+
+		return Catalog.Clayful.call_api({
+			'model_name':       Catalog.name,
+			'method_name':      'delete',
+			'http_method':      'DELETE',
+			'path':             '/v1/catalogs/{catalogId}',
+			'params':           ('catalogId', ),
 			'args':             args
 		})
 

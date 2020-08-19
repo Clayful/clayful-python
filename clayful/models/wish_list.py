@@ -288,18 +288,6 @@ class WishList:
 		})
 
 	@staticmethod
-	def delete_item(*args):
-
-		return WishList.Clayful.call_api({
-			'model_name':       WishList.name,
-			'method_name':      'delete_item',
-			'http_method':      'DELETE',
-			'path':             '/v1/wishlists/{wishListId}/items/{productId}',
-			'params':           ('wishListId', 'productId', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def delete_metafield(*args):
 
 		return WishList.Clayful.call_api({
@@ -308,6 +296,18 @@ class WishList:
 			'http_method':      'DELETE',
 			'path':             '/v1/wishlists/{wishListId}/meta/{field}',
 			'params':           ('wishListId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def delete_item(*args):
+
+		return WishList.Clayful.call_api({
+			'model_name':       WishList.name,
+			'method_name':      'delete_item',
+			'http_method':      'DELETE',
+			'path':             '/v1/wishlists/{wishListId}/items/{productId}',
+			'params':           ('wishListId', 'productId', ),
 			'args':             args
 		})
 

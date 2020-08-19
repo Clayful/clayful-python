@@ -48,6 +48,18 @@ class Coupon:
 		})
 
 	@staticmethod
+	def pull_from_metafield(*args):
+
+		return Coupon.Clayful.call_api({
+			'model_name':       Coupon.name,
+			'method_name':      'pull_from_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/coupons/{couponId}/meta/{field}/pull',
+			'params':           ('couponId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def push_to_metafield(*args):
 
 		return Coupon.Clayful.call_api({
@@ -67,18 +79,6 @@ class Coupon:
 			'method_name':      'increase_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/coupons/{couponId}/meta/{field}/inc',
-			'params':           ('couponId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def pull_from_metafield(*args):
-
-		return Coupon.Clayful.call_api({
-			'model_name':       Coupon.name,
-			'method_name':      'pull_from_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/coupons/{couponId}/meta/{field}/pull',
 			'params':           ('couponId', 'field', ),
 			'args':             args
 		})

@@ -96,6 +96,19 @@ class Subscription:
 		})
 
 	@staticmethod
+	def sync_inventory(*args):
+
+		return Subscription.Clayful.call_api({
+			'model_name':       Subscription.name,
+			'method_name':      'sync_inventory',
+			'http_method':      'POST',
+			'path':             '/v1/subscriptions/{subscriptionId}/synced',
+			'params':           ('subscriptionId', ),
+			'without_payload':  True,
+			'args':             args
+		})
+
+	@staticmethod
 	def mark_as_done(*args):
 
 		return Subscription.Clayful.call_api({
@@ -121,15 +134,14 @@ class Subscription:
 		})
 
 	@staticmethod
-	def sync_inventory(*args):
+	def cancel(*args):
 
 		return Subscription.Clayful.call_api({
 			'model_name':       Subscription.name,
-			'method_name':      'sync_inventory',
+			'method_name':      'cancel',
 			'http_method':      'POST',
-			'path':             '/v1/subscriptions/{subscriptionId}/synced',
+			'path':             '/v1/subscriptions/{subscriptionId}/cancellation',
 			'params':           ('subscriptionId', ),
-			'without_payload':  True,
 			'args':             args
 		})
 
@@ -146,13 +158,13 @@ class Subscription:
 		})
 
 	@staticmethod
-	def cancel(*args):
+	def schedule_for_me(*args):
 
 		return Subscription.Clayful.call_api({
 			'model_name':       Subscription.name,
-			'method_name':      'cancel',
+			'method_name':      'schedule_for_me',
 			'http_method':      'POST',
-			'path':             '/v1/subscriptions/{subscriptionId}/cancellation',
+			'path':             '/v1/me/subscriptions/{subscriptionId}/scheduled',
 			'params':           ('subscriptionId', ),
 			'args':             args
 		})
@@ -165,18 +177,6 @@ class Subscription:
 			'method_name':      'cancel_for_me',
 			'http_method':      'POST',
 			'path':             '/v1/me/subscriptions/{subscriptionId}/cancellation',
-			'params':           ('subscriptionId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def schedule_for_me(*args):
-
-		return Subscription.Clayful.call_api({
-			'model_name':       Subscription.name,
-			'method_name':      'schedule_for_me',
-			'http_method':      'POST',
-			'path':             '/v1/me/subscriptions/{subscriptionId}/scheduled',
 			'params':           ('subscriptionId', ),
 			'args':             args
 		})
@@ -206,18 +206,6 @@ class Subscription:
 		})
 
 	@staticmethod
-	def increase_metafield(*args):
-
-		return Subscription.Clayful.call_api({
-			'model_name':       Subscription.name,
-			'method_name':      'increase_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/subscriptions/{subscriptionId}/meta/{field}/inc',
-			'params':           ('subscriptionId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def push_to_metafield(*args):
 
 		return Subscription.Clayful.call_api({
@@ -225,6 +213,18 @@ class Subscription:
 			'method_name':      'push_to_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/subscriptions/{subscriptionId}/meta/{field}/push',
+			'params':           ('subscriptionId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def increase_metafield(*args):
+
+		return Subscription.Clayful.call_api({
+			'model_name':       Subscription.name,
+			'method_name':      'increase_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/subscriptions/{subscriptionId}/meta/{field}/inc',
 			'params':           ('subscriptionId', 'field', ),
 			'args':             args
 		})
@@ -274,6 +274,18 @@ class Subscription:
 			'http_method':      'PUT',
 			'path':             '/v1/me/subscriptions/{subscriptionId}/cancellation',
 			'params':           ('subscriptionId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def update_item(*args):
+
+		return Subscription.Clayful.call_api({
+			'model_name':       Subscription.name,
+			'method_name':      'update_item',
+			'http_method':      'PUT',
+			'path':             '/v1/subscriptions/{subscriptionId}/items/{itemId}',
+			'params':           ('subscriptionId', 'itemId', ),
 			'args':             args
 		})
 

@@ -158,18 +158,6 @@ class Review:
 		})
 
 	@staticmethod
-	def increase_metafield(*args):
-
-		return Review.Clayful.call_api({
-			'model_name':       Review.name,
-			'method_name':      'increase_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/products/reviews/{reviewId}/meta/{field}/inc',
-			'params':           ('reviewId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def push_to_metafield(*args):
 
 		return Review.Clayful.call_api({
@@ -189,6 +177,18 @@ class Review:
 			'method_name':      'pull_from_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/products/reviews/{reviewId}/meta/{field}/pull',
+			'params':           ('reviewId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def increase_metafield(*args):
+
+		return Review.Clayful.call_api({
+			'model_name':       Review.name,
+			'method_name':      'increase_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/products/reviews/{reviewId}/meta/{field}/inc',
 			'params':           ('reviewId', 'field', ),
 			'args':             args
 		})
