@@ -84,18 +84,6 @@ class Product:
 		})
 
 	@staticmethod
-	def pull_from_metafield(*args):
-
-		return Product.Clayful.call_api({
-			'model_name':       Product.name,
-			'method_name':      'pull_from_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/products/{productId}/meta/{field}/pull',
-			'params':           ('productId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def create_variation(*args):
 
 		return Product.Clayful.call_api({
@@ -115,6 +103,18 @@ class Product:
 			'method_name':      'increase_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/products/{productId}/meta/{field}/inc',
+			'params':           ('productId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def pull_from_metafield(*args):
+
+		return Product.Clayful.call_api({
+			'model_name':       Product.name,
+			'method_name':      'pull_from_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/products/{productId}/meta/{field}/pull',
 			'params':           ('productId', 'field', ),
 			'args':             args
 		})
@@ -204,18 +204,6 @@ class Product:
 		})
 
 	@staticmethod
-	def delete_metafield(*args):
-
-		return Product.Clayful.call_api({
-			'model_name':       Product.name,
-			'method_name':      'delete_metafield',
-			'http_method':      'DELETE',
-			'path':             '/v1/products/{productId}/meta/{field}',
-			'params':           ('productId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def delete_variant(*args):
 
 		return Product.Clayful.call_api({
@@ -224,6 +212,18 @@ class Product:
 			'http_method':      'DELETE',
 			'path':             '/v1/products/{productId}/variants/{variantId}',
 			'params':           ('productId', 'variantId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def delete_metafield(*args):
+
+		return Product.Clayful.call_api({
+			'model_name':       Product.name,
+			'method_name':      'delete_metafield',
+			'http_method':      'DELETE',
+			'path':             '/v1/products/{productId}/meta/{field}',
+			'params':           ('productId', 'field', ),
 			'args':             args
 		})
 

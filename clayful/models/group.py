@@ -48,6 +48,18 @@ class Group:
 		})
 
 	@staticmethod
+	def push_to_metafield(*args):
+
+		return Group.Clayful.call_api({
+			'model_name':       Group.name,
+			'method_name':      'push_to_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/groups/{groupId}/meta/{field}/push',
+			'params':           ('groupId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def increase_metafield(*args):
 
 		return Group.Clayful.call_api({
@@ -67,18 +79,6 @@ class Group:
 			'method_name':      'pull_from_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/groups/{groupId}/meta/{field}/pull',
-			'params':           ('groupId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def push_to_metafield(*args):
-
-		return Group.Clayful.call_api({
-			'model_name':       Group.name,
-			'method_name':      'push_to_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/groups/{groupId}/meta/{field}/push',
 			'params':           ('groupId', 'field', ),
 			'args':             args
 		})

@@ -60,18 +60,6 @@ class Brand:
 		})
 
 	@staticmethod
-	def push_to_metafield(*args):
-
-		return Brand.Clayful.call_api({
-			'model_name':       Brand.name,
-			'method_name':      'push_to_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/brands/{brandId}/meta/{field}/push',
-			'params':           ('brandId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def pull_from_metafield(*args):
 
 		return Brand.Clayful.call_api({
@@ -91,6 +79,18 @@ class Brand:
 			'method_name':      'increase_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/brands/{brandId}/meta/{field}/inc',
+			'params':           ('brandId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def push_to_metafield(*args):
+
+		return Brand.Clayful.call_api({
+			'model_name':       Brand.name,
+			'method_name':      'push_to_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/brands/{brandId}/meta/{field}/push',
 			'params':           ('brandId', 'field', ),
 			'args':             args
 		})

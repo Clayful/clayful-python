@@ -132,18 +132,6 @@ class Customer:
 		})
 
 	@staticmethod
-	def list_by_flag_votes(*args):
-
-		return Customer.Clayful.call_api({
-			'model_name':       Customer.name,
-			'method_name':      'list_by_flag_votes',
-			'http_method':      'GET',
-			'path':             '/v1/{voteModel}/{voteModelId}/flags/customers',
-			'params':           ('voteModel', 'voteModelId', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def list_by_help_votes(*args):
 
 		return Customer.Clayful.call_api({
@@ -152,6 +140,18 @@ class Customer:
 			'http_method':      'GET',
 			'path':             '/v1/{voteModel}/{voteModelId}/helped/{upDown}/customers',
 			'params':           ('voteModel', 'voteModelId', 'upDown', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def list_by_flag_votes(*args):
+
+		return Customer.Clayful.call_api({
+			'model_name':       Customer.name,
+			'method_name':      'list_by_flag_votes',
+			'http_method':      'GET',
+			'path':             '/v1/{voteModel}/{voteModelId}/flags/customers',
+			'params':           ('voteModel', 'voteModelId', ),
 			'args':             args
 		})
 
@@ -224,7 +224,6 @@ class Customer:
 			'http_method':      'POST',
 			'path':             '/v1/customers/auth/{vendor}',
 			'params':           ('vendor', ),
-			'without_payload':  True,
 			'args':             args
 		})
 
@@ -253,18 +252,6 @@ class Customer:
 		})
 
 	@staticmethod
-	def verify(*args):
-
-		return Customer.Clayful.call_api({
-			'model_name':       Customer.name,
-			'method_name':      'verify',
-			'http_method':      'POST',
-			'path':             '/v1/customers/{customerId}/verified',
-			'params':           ('customerId', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def add_coupon(*args):
 
 		return Customer.Clayful.call_api({
@@ -272,6 +259,18 @@ class Customer:
 			'method_name':      'add_coupon',
 			'http_method':      'POST',
 			'path':             '/v1/customers/{customerId}/coupons',
+			'params':           ('customerId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def verify(*args):
+
+		return Customer.Clayful.call_api({
+			'model_name':       Customer.name,
+			'method_name':      'verify',
+			'http_method':      'POST',
+			'path':             '/v1/customers/{customerId}/verified',
 			'params':           ('customerId', ),
 			'args':             args
 		})
@@ -301,18 +300,6 @@ class Customer:
 		})
 
 	@staticmethod
-	def push_to_metafield(*args):
-
-		return Customer.Clayful.call_api({
-			'model_name':       Customer.name,
-			'method_name':      'push_to_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/customers/{customerId}/meta/{field}/push',
-			'params':           ('customerId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def pull_from_metafield(*args):
 
 		return Customer.Clayful.call_api({
@@ -320,6 +307,18 @@ class Customer:
 			'method_name':      'pull_from_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/customers/{customerId}/meta/{field}/pull',
+			'params':           ('customerId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def push_to_metafield(*args):
+
+		return Customer.Clayful.call_api({
+			'model_name':       Customer.name,
+			'method_name':      'push_to_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/customers/{customerId}/meta/{field}/push',
 			'params':           ('customerId', 'field', ),
 			'args':             args
 		})

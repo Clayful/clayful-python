@@ -133,6 +133,18 @@ class Order:
 		})
 
 	@staticmethod
+	def create_fulfillment(*args):
+
+		return Order.Clayful.call_api({
+			'model_name':       Order.name,
+			'method_name':      'create_fulfillment',
+			'http_method':      'POST',
+			'path':             '/v1/orders/{orderId}/fulfillments',
+			'params':           ('orderId', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def sync_inventory(*args):
 
 		return Order.Clayful.call_api({
@@ -171,18 +183,6 @@ class Order:
 		})
 
 	@staticmethod
-	def authenticate(*args):
-
-		return Order.Clayful.call_api({
-			'model_name':       Order.name,
-			'method_name':      'authenticate',
-			'http_method':      'POST',
-			'path':             '/v1/orders/{orderId}/auth',
-			'params':           ('orderId', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def cancel(*args):
 
 		return Order.Clayful.call_api({
@@ -195,25 +195,13 @@ class Order:
 		})
 
 	@staticmethod
-	def create_fulfillment(*args):
+	def authenticate(*args):
 
 		return Order.Clayful.call_api({
 			'model_name':       Order.name,
-			'method_name':      'create_fulfillment',
+			'method_name':      'authenticate',
 			'http_method':      'POST',
-			'path':             '/v1/orders/{orderId}/fulfillments',
-			'params':           ('orderId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def request_refund_for_me(*args):
-
-		return Order.Clayful.call_api({
-			'model_name':       Order.name,
-			'method_name':      'request_refund_for_me',
-			'http_method':      'POST',
-			'path':             '/v1/me/orders/{orderId}/refunds',
+			'path':             '/v1/orders/{orderId}/auth',
 			'params':           ('orderId', ),
 			'args':             args
 		})
@@ -232,6 +220,18 @@ class Order:
 		})
 
 	@staticmethod
+	def request_refund_for_me(*args):
+
+		return Order.Clayful.call_api({
+			'model_name':       Order.name,
+			'method_name':      'request_refund_for_me',
+			'http_method':      'POST',
+			'path':             '/v1/me/orders/{orderId}/refunds',
+			'params':           ('orderId', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def cancel_for_me(*args):
 
 		return Order.Clayful.call_api({
@@ -240,6 +240,19 @@ class Order:
 			'http_method':      'POST',
 			'path':             '/v1/me/orders/{orderId}/cancellation',
 			'params':           ('orderId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def use_ticket(*args):
+
+		return Order.Clayful.call_api({
+			'model_name':       Order.name,
+			'method_name':      'use_ticket',
+			'http_method':      'POST',
+			'path':             '/v1/orders/tickets/{code}/used',
+			'params':           ('code', ),
+			'without_payload':  True,
 			'args':             args
 		})
 
@@ -256,15 +269,26 @@ class Order:
 		})
 
 	@staticmethod
-	def use_ticket(*args):
+	def push_to_metafield(*args):
 
 		return Order.Clayful.call_api({
 			'model_name':       Order.name,
-			'method_name':      'use_ticket',
+			'method_name':      'push_to_metafield',
 			'http_method':      'POST',
-			'path':             '/v1/orders/tickets/{code}/used',
-			'params':           ('code', ),
-			'without_payload':  True,
+			'path':             '/v1/orders/{orderId}/meta/{field}/push',
+			'params':           ('orderId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def register_payment_method(*args):
+
+		return Order.Clayful.call_api({
+			'model_name':       Order.name,
+			'method_name':      'register_payment_method',
+			'http_method':      'POST',
+			'path':             '/v1/orders/{orderId}/transactions/payments/methods',
+			'params':           ('orderId', ),
 			'args':             args
 		})
 
@@ -293,18 +317,6 @@ class Order:
 		})
 
 	@staticmethod
-	def cancel_refund(*args):
-
-		return Order.Clayful.call_api({
-			'model_name':       Order.name,
-			'method_name':      'cancel_refund',
-			'http_method':      'POST',
-			'path':             '/v1/orders/{orderId}/refunds/{refundId}/cancellation',
-			'params':           ('orderId', 'refundId', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def pull_from_metafield(*args):
 
 		return Order.Clayful.call_api({
@@ -313,18 +325,6 @@ class Order:
 			'http_method':      'POST',
 			'path':             '/v1/orders/{orderId}/meta/{field}/pull',
 			'params':           ('orderId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def register_payment_method(*args):
-
-		return Order.Clayful.call_api({
-			'model_name':       Order.name,
-			'method_name':      'register_payment_method',
-			'http_method':      'POST',
-			'path':             '/v1/orders/{orderId}/transactions/payments/methods',
-			'params':           ('orderId', ),
 			'args':             args
 		})
 
@@ -342,14 +342,14 @@ class Order:
 		})
 
 	@staticmethod
-	def push_to_metafield(*args):
+	def cancel_refund(*args):
 
 		return Order.Clayful.call_api({
 			'model_name':       Order.name,
-			'method_name':      'push_to_metafield',
+			'method_name':      'cancel_refund',
 			'http_method':      'POST',
-			'path':             '/v1/orders/{orderId}/meta/{field}/push',
-			'params':           ('orderId', 'field', ),
+			'path':             '/v1/orders/{orderId}/refunds/{refundId}/cancellation',
+			'params':           ('orderId', 'refundId', ),
 			'args':             args
 		})
 
@@ -366,19 +366,6 @@ class Order:
 		})
 
 	@staticmethod
-	def restock_all_refund_items(*args):
-
-		return Order.Clayful.call_api({
-			'model_name':       Order.name,
-			'method_name':      'restock_all_refund_items',
-			'http_method':      'POST',
-			'path':             '/v1/orders/{orderId}/refunds/{refundId}/restock/all',
-			'params':           ('orderId', 'refundId', ),
-			'without_payload':  True,
-			'args':             args
-		})
-
-	@staticmethod
 	def create_download_url(*args):
 
 		return Order.Clayful.call_api({
@@ -387,6 +374,19 @@ class Order:
 			'http_method':      'POST',
 			'path':             '/v1/orders/{orderId}/items/{itemId}/download/url',
 			'params':           ('orderId', 'itemId', ),
+			'without_payload':  True,
+			'args':             args
+		})
+
+	@staticmethod
+	def restock_all_refund_items(*args):
+
+		return Order.Clayful.call_api({
+			'model_name':       Order.name,
+			'method_name':      'restock_all_refund_items',
+			'http_method':      'POST',
+			'path':             '/v1/orders/{orderId}/refunds/{refundId}/restock/all',
+			'params':           ('orderId', 'refundId', ),
 			'without_payload':  True,
 			'args':             args
 		})
@@ -429,18 +429,6 @@ class Order:
 		})
 
 	@staticmethod
-	def update_cancellation(*args):
-
-		return Order.Clayful.call_api({
-			'model_name':       Order.name,
-			'method_name':      'update_cancellation',
-			'http_method':      'PUT',
-			'path':             '/v1/orders/{orderId}/cancellation',
-			'params':           ('orderId', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def update_transactions(*args):
 
 		return Order.Clayful.call_api({
@@ -448,6 +436,18 @@ class Order:
 			'method_name':      'update_transactions',
 			'http_method':      'PUT',
 			'path':             '/v1/orders/{orderId}/transactions',
+			'params':           ('orderId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def update_cancellation(*args):
+
+		return Order.Clayful.call_api({
+			'model_name':       Order.name,
+			'method_name':      'update_cancellation',
+			'http_method':      'PUT',
+			'path':             '/v1/orders/{orderId}/cancellation',
 			'params':           ('orderId', ),
 			'args':             args
 		})
@@ -478,14 +478,14 @@ class Order:
 		})
 
 	@staticmethod
-	def update_refund(*args):
+	def update_fulfillment(*args):
 
 		return Order.Clayful.call_api({
 			'model_name':       Order.name,
-			'method_name':      'update_refund',
+			'method_name':      'update_fulfillment',
 			'http_method':      'PUT',
-			'path':             '/v1/orders/{orderId}/refunds/{refundId}',
-			'params':           ('orderId', 'refundId', ),
+			'path':             '/v1/orders/{orderId}/fulfillments/{fulfillmentId}',
+			'params':           ('orderId', 'fulfillmentId', ),
 			'args':             args
 		})
 
@@ -502,14 +502,14 @@ class Order:
 		})
 
 	@staticmethod
-	def update_fulfillment(*args):
+	def update_refund(*args):
 
 		return Order.Clayful.call_api({
 			'model_name':       Order.name,
-			'method_name':      'update_fulfillment',
+			'method_name':      'update_refund',
 			'http_method':      'PUT',
-			'path':             '/v1/orders/{orderId}/fulfillments/{fulfillmentId}',
-			'params':           ('orderId', 'fulfillmentId', ),
+			'path':             '/v1/orders/{orderId}/refunds/{refundId}',
+			'params':           ('orderId', 'refundId', ),
 			'args':             args
 		})
 
@@ -562,18 +562,6 @@ class Order:
 		})
 
 	@staticmethod
-	def mark_as_undone(*args):
-
-		return Order.Clayful.call_api({
-			'model_name':       Order.name,
-			'method_name':      'mark_as_undone',
-			'http_method':      'DELETE',
-			'path':             '/v1/orders/{orderId}/done',
-			'params':           ('orderId', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def mark_as_not_received(*args):
 
 		return Order.Clayful.call_api({
@@ -581,6 +569,18 @@ class Order:
 			'method_name':      'mark_as_not_received',
 			'http_method':      'DELETE',
 			'path':             '/v1/orders/{orderId}/received',
+			'params':           ('orderId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def mark_as_undone(*args):
+
+		return Order.Clayful.call_api({
+			'model_name':       Order.name,
+			'method_name':      'mark_as_undone',
+			'http_method':      'DELETE',
+			'path':             '/v1/orders/{orderId}/done',
 			'params':           ('orderId', ),
 			'args':             args
 		})
@@ -594,6 +594,18 @@ class Order:
 			'http_method':      'DELETE',
 			'path':             '/v1/me/orders/{orderId}/received',
 			'params':           ('orderId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def delete_metafield(*args):
+
+		return Order.Clayful.call_api({
+			'model_name':       Order.name,
+			'method_name':      'delete_metafield',
+			'http_method':      'DELETE',
+			'path':             '/v1/orders/{orderId}/meta/{field}',
+			'params':           ('orderId', 'field', ),
 			'args':             args
 		})
 
@@ -618,18 +630,6 @@ class Order:
 			'http_method':      'DELETE',
 			'path':             '/v1/orders/{orderId}/refunds/{refundId}',
 			'params':           ('orderId', 'refundId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def delete_metafield(*args):
-
-		return Order.Clayful.call_api({
-			'model_name':       Order.name,
-			'method_name':      'delete_metafield',
-			'http_method':      'DELETE',
-			'path':             '/v1/orders/{orderId}/meta/{field}',
-			'params':           ('orderId', 'field', ),
 			'args':             args
 		})
 
