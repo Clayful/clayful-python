@@ -12,18 +12,6 @@ class TaxCategory:
 		return TaxCategory
 
 	@staticmethod
-	def list(*args):
-
-		return TaxCategory.Clayful.call_api({
-			'model_name':       TaxCategory.name,
-			'method_name':      'list',
-			'http_method':      'GET',
-			'path':             '/v1/taxes/categories',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def count(*args):
 
 		return TaxCategory.Clayful.call_api({
@@ -44,6 +32,18 @@ class TaxCategory:
 			'http_method':      'GET',
 			'path':             '/v1/taxes/categories/{taxCategoryId}',
 			'params':           ('taxCategoryId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def list(*args):
+
+		return TaxCategory.Clayful.call_api({
+			'model_name':       TaxCategory.name,
+			'method_name':      'list',
+			'http_method':      'GET',
+			'path':             '/v1/taxes/categories',
+			'params':           (),
 			'args':             args
 		})
 

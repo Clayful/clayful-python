@@ -12,18 +12,6 @@ class OrderTag:
 		return OrderTag
 
 	@staticmethod
-	def list(*args):
-
-		return OrderTag.Clayful.call_api({
-			'model_name':       OrderTag.name,
-			'method_name':      'list',
-			'http_method':      'GET',
-			'path':             '/v1/orders/tags',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def count(*args):
 
 		return OrderTag.Clayful.call_api({
@@ -44,6 +32,18 @@ class OrderTag:
 			'http_method':      'GET',
 			'path':             '/v1/orders/tags/{orderTagId}',
 			'params':           ('orderTagId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def list(*args):
+
+		return OrderTag.Clayful.call_api({
+			'model_name':       OrderTag.name,
+			'method_name':      'list',
+			'http_method':      'GET',
+			'path':             '/v1/orders/tags',
+			'params':           (),
 			'args':             args
 		})
 

@@ -12,18 +12,6 @@ class SubscriptionPlan:
 		return SubscriptionPlan
 
 	@staticmethod
-	def list(*args):
-
-		return SubscriptionPlan.Clayful.call_api({
-			'model_name':       SubscriptionPlan.name,
-			'method_name':      'list',
-			'http_method':      'GET',
-			'path':             '/v1/subscriptions/plans',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def count(*args):
 
 		return SubscriptionPlan.Clayful.call_api({
@@ -44,6 +32,18 @@ class SubscriptionPlan:
 			'http_method':      'GET',
 			'path':             '/v1/subscriptions/plans/{subscriptionPlanId}',
 			'params':           ('subscriptionPlanId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def list(*args):
+
+		return SubscriptionPlan.Clayful.call_api({
+			'model_name':       SubscriptionPlan.name,
+			'method_name':      'list',
+			'http_method':      'GET',
+			'path':             '/v1/subscriptions/plans',
+			'params':           (),
 			'args':             args
 		})
 

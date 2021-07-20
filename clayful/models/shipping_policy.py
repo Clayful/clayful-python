@@ -12,18 +12,6 @@ class ShippingPolicy:
 		return ShippingPolicy
 
 	@staticmethod
-	def list(*args):
-
-		return ShippingPolicy.Clayful.call_api({
-			'model_name':       ShippingPolicy.name,
-			'method_name':      'list',
-			'http_method':      'GET',
-			'path':             '/v1/shipping/policies',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def count(*args):
 
 		return ShippingPolicy.Clayful.call_api({
@@ -44,6 +32,18 @@ class ShippingPolicy:
 			'http_method':      'GET',
 			'path':             '/v1/shipping/policies/{shippingPolicyId}',
 			'params':           ('shippingPolicyId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def list(*args):
+
+		return ShippingPolicy.Clayful.call_api({
+			'model_name':       ShippingPolicy.name,
+			'method_name':      'list',
+			'http_method':      'GET',
+			'path':             '/v1/shipping/policies',
+			'params':           (),
 			'args':             args
 		})
 

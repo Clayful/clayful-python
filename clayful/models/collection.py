@@ -12,18 +12,6 @@ class Collection:
 		return Collection
 
 	@staticmethod
-	def list(*args):
-
-		return Collection.Clayful.call_api({
-			'model_name':       Collection.name,
-			'method_name':      'list',
-			'http_method':      'GET',
-			'path':             '/v1/collections',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def count(*args):
 
 		return Collection.Clayful.call_api({
@@ -32,18 +20,6 @@ class Collection:
 			'http_method':      'GET',
 			'path':             '/v1/collections/count',
 			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
-	def get(*args):
-
-		return Collection.Clayful.call_api({
-			'model_name':       Collection.name,
-			'method_name':      'get',
-			'http_method':      'GET',
-			'path':             '/v1/collections/{collectionId}',
-			'params':           ('collectionId', ),
 			'args':             args
 		})
 
@@ -60,14 +36,38 @@ class Collection:
 		})
 
 	@staticmethod
-	def pull_from_metafield(*args):
+	def delete(*args):
 
 		return Collection.Clayful.call_api({
 			'model_name':       Collection.name,
-			'method_name':      'pull_from_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/collections/{collectionId}/meta/{field}/pull',
+			'method_name':      'delete',
+			'http_method':      'DELETE',
+			'path':             '/v1/collections/{collectionId}',
+			'params':           ('collectionId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def delete_metafield(*args):
+
+		return Collection.Clayful.call_api({
+			'model_name':       Collection.name,
+			'method_name':      'delete_metafield',
+			'http_method':      'DELETE',
+			'path':             '/v1/collections/{collectionId}/meta/{field}',
 			'params':           ('collectionId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def get(*args):
+
+		return Collection.Clayful.call_api({
+			'model_name':       Collection.name,
+			'method_name':      'get',
+			'http_method':      'GET',
+			'path':             '/v1/collections/{collectionId}',
+			'params':           ('collectionId', ),
 			'args':             args
 		})
 
@@ -79,6 +79,30 @@ class Collection:
 			'method_name':      'increase_metafield',
 			'http_method':      'POST',
 			'path':             '/v1/collections/{collectionId}/meta/{field}/inc',
+			'params':           ('collectionId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def list(*args):
+
+		return Collection.Clayful.call_api({
+			'model_name':       Collection.name,
+			'method_name':      'list',
+			'http_method':      'GET',
+			'path':             '/v1/collections',
+			'params':           (),
+			'args':             args
+		})
+
+	@staticmethod
+	def pull_from_metafield(*args):
+
+		return Collection.Clayful.call_api({
+			'model_name':       Collection.name,
+			'method_name':      'pull_from_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/collections/{collectionId}/meta/{field}/pull',
 			'params':           ('collectionId', 'field', ),
 			'args':             args
 		})
@@ -104,30 +128,6 @@ class Collection:
 			'http_method':      'PUT',
 			'path':             '/v1/collections/{collectionId}',
 			'params':           ('collectionId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def delete(*args):
-
-		return Collection.Clayful.call_api({
-			'model_name':       Collection.name,
-			'method_name':      'delete',
-			'http_method':      'DELETE',
-			'path':             '/v1/collections/{collectionId}',
-			'params':           ('collectionId', ),
-			'args':             args
-		})
-
-	@staticmethod
-	def delete_metafield(*args):
-
-		return Collection.Clayful.call_api({
-			'model_name':       Collection.name,
-			'method_name':      'delete_metafield',
-			'http_method':      'DELETE',
-			'path':             '/v1/collections/{collectionId}/meta/{field}',
-			'params':           ('collectionId', 'field', ),
 			'args':             args
 		})
 

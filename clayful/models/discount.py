@@ -12,18 +12,6 @@ class Discount:
 		return Discount
 
 	@staticmethod
-	def list(*args):
-
-		return Discount.Clayful.call_api({
-			'model_name':       Discount.name,
-			'method_name':      'list',
-			'http_method':      'GET',
-			'path':             '/v1/discounts',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def count(*args):
 
 		return Discount.Clayful.call_api({
@@ -32,6 +20,18 @@ class Discount:
 			'http_method':      'GET',
 			'path':             '/v1/discounts/count',
 			'params':           (),
+			'args':             args
+		})
+
+	@staticmethod
+	def delete_metafield(*args):
+
+		return Discount.Clayful.call_api({
+			'model_name':       Discount.name,
+			'method_name':      'delete_metafield',
+			'http_method':      'DELETE',
+			'path':             '/v1/discounts/{discountId}/meta/{field}',
+			'params':           ('discountId', 'field', ),
 			'args':             args
 		})
 
@@ -48,18 +48,6 @@ class Discount:
 		})
 
 	@staticmethod
-	def push_to_metafield(*args):
-
-		return Discount.Clayful.call_api({
-			'model_name':       Discount.name,
-			'method_name':      'push_to_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/discounts/{discountId}/meta/{field}/push',
-			'params':           ('discountId', 'field', ),
-			'args':             args
-		})
-
-	@staticmethod
 	def increase_metafield(*args):
 
 		return Discount.Clayful.call_api({
@@ -68,6 +56,18 @@ class Discount:
 			'http_method':      'POST',
 			'path':             '/v1/discounts/{discountId}/meta/{field}/inc',
 			'params':           ('discountId', 'field', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def list(*args):
+
+		return Discount.Clayful.call_api({
+			'model_name':       Discount.name,
+			'method_name':      'list',
+			'http_method':      'GET',
+			'path':             '/v1/discounts',
+			'params':           (),
 			'args':             args
 		})
 
@@ -84,13 +84,13 @@ class Discount:
 		})
 
 	@staticmethod
-	def delete_metafield(*args):
+	def push_to_metafield(*args):
 
 		return Discount.Clayful.call_api({
 			'model_name':       Discount.name,
-			'method_name':      'delete_metafield',
-			'http_method':      'DELETE',
-			'path':             '/v1/discounts/{discountId}/meta/{field}',
+			'method_name':      'push_to_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/discounts/{discountId}/meta/{field}/push',
 			'params':           ('discountId', 'field', ),
 			'args':             args
 		})

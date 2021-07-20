@@ -12,18 +12,6 @@ class Downloadable:
 		return Downloadable
 
 	@staticmethod
-	def list(*args):
-
-		return Downloadable.Clayful.call_api({
-			'model_name':       Downloadable.name,
-			'method_name':      'list',
-			'http_method':      'GET',
-			'path':             '/v1/downloadables',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def count(*args):
 
 		return Downloadable.Clayful.call_api({
@@ -32,6 +20,19 @@ class Downloadable:
 			'http_method':      'GET',
 			'path':             '/v1/downloadables/count',
 			'params':           (),
+			'args':             args
+		})
+
+	@staticmethod
+	def create_download_url(*args):
+
+		return Downloadable.Clayful.call_api({
+			'model_name':       Downloadable.name,
+			'method_name':      'create_download_url',
+			'http_method':      'POST',
+			'path':             '/v1/downloadables/{downloadableId}/url',
+			'params':           ('downloadableId', ),
+			'without_payload':  True,
 			'args':             args
 		})
 
@@ -48,15 +49,14 @@ class Downloadable:
 		})
 
 	@staticmethod
-	def create_download_url(*args):
+	def list(*args):
 
 		return Downloadable.Clayful.call_api({
 			'model_name':       Downloadable.name,
-			'method_name':      'create_download_url',
-			'http_method':      'POST',
-			'path':             '/v1/downloadables/{downloadableId}/url',
-			'params':           ('downloadableId', ),
-			'without_payload':  True,
+			'method_name':      'list',
+			'http_method':      'GET',
+			'path':             '/v1/downloadables',
+			'params':           (),
 			'args':             args
 		})
 

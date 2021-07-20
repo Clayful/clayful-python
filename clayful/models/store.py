@@ -12,6 +12,18 @@ class Store:
 		return Store
 
 	@staticmethod
+	def delete_metafield(*args):
+
+		return Store.Clayful.call_api({
+			'model_name':       Store.name,
+			'method_name':      'delete_metafield',
+			'http_method':      'DELETE',
+			'path':             '/v1/store/meta/{field}',
+			'params':           ('field', ),
+			'args':             args
+		})
+
+	@staticmethod
 	def get(*args):
 
 		return Store.Clayful.call_api({
@@ -20,18 +32,6 @@ class Store:
 			'http_method':      'GET',
 			'path':             '/v1/store',
 			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
-	def push_to_metafield(*args):
-
-		return Store.Clayful.call_api({
-			'model_name':       Store.name,
-			'method_name':      'push_to_metafield',
-			'http_method':      'POST',
-			'path':             '/v1/store/meta/{field}/push',
-			'params':           ('field', ),
 			'args':             args
 		})
 
@@ -60,13 +60,13 @@ class Store:
 		})
 
 	@staticmethod
-	def delete_metafield(*args):
+	def push_to_metafield(*args):
 
 		return Store.Clayful.call_api({
 			'model_name':       Store.name,
-			'method_name':      'delete_metafield',
-			'http_method':      'DELETE',
-			'path':             '/v1/store/meta/{field}',
+			'method_name':      'push_to_metafield',
+			'http_method':      'POST',
+			'path':             '/v1/store/meta/{field}/push',
 			'params':           ('field', ),
 			'args':             args
 		})

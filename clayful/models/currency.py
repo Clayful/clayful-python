@@ -12,18 +12,6 @@ class Currency:
 		return Currency
 
 	@staticmethod
-	def list(*args):
-
-		return Currency.Clayful.call_api({
-			'model_name':       Currency.name,
-			'method_name':      'list',
-			'http_method':      'GET',
-			'path':             '/v1/currencies',
-			'params':           (),
-			'args':             args
-		})
-
-	@staticmethod
 	def count(*args):
 
 		return Currency.Clayful.call_api({
@@ -44,6 +32,18 @@ class Currency:
 			'http_method':      'GET',
 			'path':             '/v1/currencies/{currencyId}',
 			'params':           ('currencyId', ),
+			'args':             args
+		})
+
+	@staticmethod
+	def list(*args):
+
+		return Currency.Clayful.call_api({
+			'model_name':       Currency.name,
+			'method_name':      'list',
+			'http_method':      'GET',
+			'path':             '/v1/currencies',
+			'params':           (),
 			'args':             args
 		})
 
